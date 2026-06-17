@@ -1,16 +1,22 @@
-import { SignInPage, UserProfilePage } from "../pageobjects/";
+import { SignInPage, UserProfilePage, AccountPage } from "../pageobjects/";
 import { expect } from "chai";
 
 const signInPage = new SignInPage();
 const userProfilePage = new UserProfilePage();
+const accountPage = new AccountPage();
 
 describe("Sign In", async () => {
   beforeEach(async () => {
     await signInPage.open();
   });
 
-  it("should have the correct title", async () => {
-    const title = await browser.getTitle();
-    expect(title).to.equal("Practice Software Testing - Toolshop - v5.0");
+  it("User successfully signs in with valid credentials", async () => {
+    await signInPage.signin(
+      "customer@practicesoftwaretesting.com",
+      "welcome01",
+    );
+    expect(await browser.getTitle()).to.equal(
+      "Overview - Practice Software Testing - Toolshop - v5.0",
+    );
   });
 });

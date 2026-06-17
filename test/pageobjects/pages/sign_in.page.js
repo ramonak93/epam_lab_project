@@ -17,7 +17,7 @@ class SignInPage extends BasePage {
     return $("input[value='Login']");
   }
 
-  async signin(email, password) {
+  async login(email, password) {
     await this.emailInput.setValue(email);
     await this.passwordInput.setValue(password);
     await this.signInButton.click();

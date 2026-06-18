@@ -9,6 +9,7 @@ import {
   UserAccountPage,
   AdminDashboardPage,
 } from "../pageobjects/";
+import { clearBrowserState } from "../helpers/browser.helper.js";
 import { expect } from "chai";
 import { should } from "chai";
 import { assert } from "chai";
@@ -23,16 +24,8 @@ describe("Sign In", async () => {
   const MAX_ATTEMPTS = 3;
 
   beforeEach(async () => {
+    await clearBrowserState();
     await signInPage.open();
-  });
-
-  afterEach(async () => {
-    // Optional: clean up after as well, in case test failed mid-way
-    await browser.execute(() => {
-      window.localStorage.clear();
-      window.sessionStorage.clear();
-    });
-    await browser.deleteAllCookies();
   });
 
   it("successfully signs in as user with valid credentials", async () => {

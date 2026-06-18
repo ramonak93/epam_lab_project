@@ -17,6 +17,18 @@ class SignInPage extends BasePage {
     return $("input[value='Login']");
   }
 
+  get emailError() {
+    return $("#email-error");
+  }
+
+  get passwordError() {
+    return $("#password-error");
+  }
+
+  get loginError() {
+    return $("div[data-test='login-error']");
+  }
+
   async login(email, password) {
     await this.emailInput.setValue(email);
     await this.passwordInput.setValue(password);

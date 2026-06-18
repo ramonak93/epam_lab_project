@@ -1,8 +1,9 @@
 import BasePage from "./base.page.js";
+import { routes } from "../../data/routes.js";
 
 class AdminDashboardPage extends BasePage {
   constructor() {
-    super("/admin/dashboard");
+    super(routes.adminDashboard);
   }
 
   get pageTitle() {
@@ -15,4 +16,4 @@ class AdminDashboardPage extends BasePage {
   }
 }
 
-export { AdminDashboardPage };
+export default new AdminDashboardPage();

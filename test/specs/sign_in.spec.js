@@ -1,36 +1,23 @@
 /*
  * UC-1 Sign in Validation (Positive andNegative Testing)
- * Practicing EXPECT SHOULD and ASSERT interfaces of Chai assertion library
+ * Practicing EXPECT, SHOULD and ASSERT interfaces of Chai assertion library
  */
 
-import { expect } from "chai";
-import { should } from "chai";
-import { assert } from "chai";
-import {
-  SignInPage,
-  UserProfilePage,
-  UserAccountPage,
-  AdminDashboardPage,
-} from "../pageobjects";
+import { expect, should, assert } from "chai";
+import { SignInPage, AccountPage, AdminDashboardPage } from "../pageobjects";
 import { clearBrowserState } from "../helpers/browser.helper.js";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 
 should();
 
-const signInPage = new SignInPage();
-const userProfilePage = new UserProfilePage();
-const userAccountPage = new UserAccountPage();
-const adminDashboardPage = new AdminDashboardPage();
-
 describe("Sign In", async () => {
   beforeEach(async () => {
     await clearBrowserState();
-    await signInPage.open();
+    await SignInPage.open();
   });
 
-  // this may fail, it is a known UI bug #21 (User will be locked after 1 invalid attempt (should be 3))
   it("successfully signs in as user with valid credentials", async () => {
-    await signInPage.login(users.validUser.email, users.validUser.password);
+    await SignInPage.login(users.validUser_1.email, users.validUser_1.password);
 
     await browser.waitUntil(
       async () => (await browser.getUrl()).includes(routes.account),
@@ -39,13 +26,12 @@ describe("Sign In", async () => {
         timeoutMsg: `Did not redirect to ${routes.account}`,
       },
     );
-    expect(await browser.getUrl()).to.include(routes.account);
 
-    expect(await userAccountPage.isLoaded()).to.be.true;
+    expect(await AccountPage.isLoaded()).to.be.true;
   });
 
   it("successfully signs in as admin with valid credentials", async () => {
-    await signInPage.login(users.admin.email, users.admin.password);
+    await SignInPage.login(users.admin.email, users.admin.password);
 
     await browser.waitUntil(
       async () => (await browser.getUrl()).includes(routes.adminDashboard),
@@ -54,22 +40,21 @@ describe("Sign In", async () => {
         timeoutMsg: `Did not redirect to ${routes.adminDashboard}`,
       },
     );
-    expect(await browser.getUrl()).to.include(routes.adminDashboard);
 
-    expect(await adminDashboardPage.isLoaded()).to.be.true;
+    expect(await AdminDashboardPage.isLoaded()).to.be.true;
   });
 
   it("fails to sign user in with missing credentials", async () => {
-    await signInPage.login("", "");
+    await SignInPage.login("", "");
 
     const currrentUrl = await browser.getUrl();
     currrentUrl.should.include(routes.login);
 
-    await signInPage.emailError.waitForDisplayed({ timeout: 5000 });
-    const emailErrorDisplayed = await signInPage.emailError.isDisplayed();
-    const passwordErrorDisplayed = await signInPage.passwordError.isDisplayed();
-    const emailErrorText = await signInPage.emailError.getText();
-    const passwordErrorText = await signInPage.passwordError.getText();
+    await SignInPage.emailError.waitForDisplayed({ timeout: 5000 });
+    const emailErrorDisplayed = await SignInPage.emailError.isDisplayed();
+    const passwordErrorDisplayed = await SignInPage.passwordError.isDisplayed();
+    const emailErrorText = await SignInPage.emailError.getText();
+    const passwordErrorText = await SignInPage.passwordError.getText();
 
     emailErrorDisplayed.should.be.true;
     emailErrorText.should.include("Email");
@@ -78,7 +63,7 @@ describe("Sign In", async () => {
   });
 
   it("fails to sign user in with invalid credentials", async () => {
-    await signInPage.login(
+    await SignInPage.login(
       users.invalidCredentials.email,
       users.invalidCredentials.password,
     );
@@ -86,26 +71,26 @@ describe("Sign In", async () => {
     const currrentUrl = await browser.getUrl();
     currrentUrl.should.include(routes.login);
 
-    await signInPage.loginError.waitForDisplayed({ timeout: 5000 });
-    const loginErrorDisplayed = await signInPage.loginError.isDisplayed();
-    const loginErrorText = await signInPage.loginError.getText();
+    await SignInPage.loginError.waitForDisplayed({ timeout: 5000 });
+    const loginErrorDisplayed = await SignInPage.loginError.isDisplayed();
+    const loginErrorText = await SignInPage.loginError.getText();
 
     loginErrorDisplayed.should.be.true;
     loginErrorText.should.match(/^(?=.*\bemail\b)(?=.*\bpassword\b).*$/gm);
   });
 
   it("locks out user after multiple failed sign in attempts", async () => {
-    for (let i = 1; i <= MAX_ATTEMPTS + 2; i++) {
-      await signInPage.login(
+    for (let i = 1; i <= MAX_ATTEMPTS + 1; i++) {
+      await SignInPage.login(
         users.lockoutTest.email,
         users.lockoutTest.password,
       );
 
-      await signInPage.loginError.waitForDisplayed({ timeout: 10000 });
+      await SignInPage.loginError.waitForDisplayed({ timeout: 5000 });
     }
 
-    const loginErrorDisplayed = await signInPage.loginError.isDisplayed();
-    const loginErrorText = await signInPage.loginError.getText();
+    const loginErrorDisplayed = await SignInPage.loginError.isDisplayed();
+    const loginErrorText = await SignInPage.loginError.getText();
 
     assert.isTrue(
       loginErrorDisplayed,

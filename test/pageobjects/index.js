@@ -1,6 +1,4 @@
-import { SignInPage } from "./pages/sign_in.page.js";
-import { UserProfilePage } from "./pages/user_profile.page.js";
-import { UserAccountPage } from "./pages/user_account.page.js";
-import { AdminDashboardPage } from "./pages/admin_dashboard.page.js";
-
-export { SignInPage, UserProfilePage, UserAccountPage, AdminDashboardPage };
+export { default as SignInPage } from "./pages/sign_in.page.js";
+export { default as ProfilePage } from "./pages/profile.page.js";
+export { default as AccountPage } from "./pages/account.page.js";
+export { default as AdminDashboardPage } from "./pages/admin_dashboard.page.js";

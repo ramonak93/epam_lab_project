@@ -1,8 +1,9 @@
 import BasePage from "./base.page.js";
+import { routes } from "../../data/routes.js";
 
-class UserAccountPage extends BasePage {
+class AccountPage extends BasePage {
   constructor() {
-    super("/account");
+    super(routes.account);
   }
 
   get pageTitle() {
@@ -15,4 +16,4 @@ class UserAccountPage extends BasePage {
   }
 }
 
-export { UserAccountPage };
+export default new AccountPage();

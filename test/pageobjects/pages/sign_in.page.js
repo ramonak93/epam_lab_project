@@ -1,8 +1,9 @@
 import BasePage from "./base.page.js";
+import { routes } from "../../data/routes.js";
 
 class SignInPage extends BasePage {
   constructor() {
-    super("/auth/login");
+    super(routes.login);
   }
 
   get emailInput() {
@@ -36,4 +37,4 @@ class SignInPage extends BasePage {
   }
 }
 
-export { SignInPage };
+export default new SignInPage();

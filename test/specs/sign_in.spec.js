@@ -5,7 +5,6 @@
 
 import { expect, should, assert } from "chai";
 import { SignInPage, AccountPage, AdminDashboardPage } from "../pageobjects";
-// import { clearBrowserState } from "../helpers/browser.helper.js";
 import { clearBrowserState, waitForRedirect } from "../helpers";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 

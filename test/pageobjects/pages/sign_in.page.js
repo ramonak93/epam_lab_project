@@ -6,6 +6,11 @@ class SignInPage extends BasePage {
     super(routes.login);
   }
 
+  async open() {
+    await super.open();
+    await this.waitForPageToLoad();
+  }
+
   get emailInput() {
     return $("#email");
   }
@@ -34,6 +39,10 @@ class SignInPage extends BasePage {
     await this.emailInput.setValue(email);
     await this.passwordInput.setValue(password);
     await this.signInButton.click();
+  }
+
+  async isLoaded() {
+    return this.signInButton.isDisplayed();
   }
 }
 

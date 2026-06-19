@@ -13,10 +13,22 @@ export const users = {
   },
 
   validUser_2: {
-    email: "ccustomer2@practicesoftwaretesting.com",
+    email: "customer2@practicesoftwaretesting.com",
     password: "welcome01",
     firstName: "Jack",
     lastName: "Howe",
+  },
+
+  validUser_3: {
+    email: "customer3@practicesoftwaretesting.com",
+    password: "pass123",
+    firstName: "Bob",
+    lastName: "Smith",
+  },
+
+  passwordChange: {
+    newPassword: "LabasVakaras99!!",
+    wrongCurrentPassword: "invalidPassword2!",
   },
 
   admin: {

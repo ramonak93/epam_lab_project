@@ -59,6 +59,26 @@ class ProfilePage extends BasePage {
     return $("#country");
   }
 
+  get currentPasswordInput() {
+    return $("#current-password");
+  }
+  get newPasswordInput() {
+    return $("#new-password");
+  }
+  get confirmPasswordInput() {
+    return $("#new-password-confirm");
+  }
+  get changePasswordBtn() {
+    return $("button[data-test='change-password-submit']");
+  }
+
+  get successMessage() {
+    return $('.toast-success, [data-test="password-change-success"]');
+  }
+  get errorMessage() {
+    return $("div[role='alert']");
+  }
+
   async getProfileInfo() {
     return {
       firstName: await this.firstNameInput.getValue(),
@@ -71,6 +91,23 @@ class ProfilePage extends BasePage {
       state: await this.stateInput.getValue(),
       country: await this.countryInput.getValue(),
     };
+  }
+
+  async changePassword(currentPassword, newPassword) {
+    await this.currentPasswordInput.setValue(currentPassword);
+    await this.newPasswordInput.setValue(newPassword);
+    await this.confirmPasswordInput.setValue(newPassword);
+    await this.changePasswordBtn.click();
+  }
+
+  async getSuccessMessage() {
+    await this.successMessage.waitForDisplayed({ timeout: 5000 });
+    return this.successMessage.getText();
+  }
+
+  async getErrorMessage() {
+    await this.errorMessage.waitForDisplayed({ timeout: 5000 });
+    return this.errorMessage.getText();
   }
 }
 

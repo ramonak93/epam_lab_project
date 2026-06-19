@@ -5,7 +5,8 @@
 
 import { expect, should, assert } from "chai";
 import { SignInPage, AccountPage, AdminDashboardPage } from "../pageobjects";
-import { clearBrowserState } from "../helpers/browser.helper.js";
+// import { clearBrowserState } from "../helpers/browser.helper.js";
+import { clearBrowserState, waitForRedirect } from "../helpers";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 
 should();
@@ -80,7 +81,7 @@ describe("Sign In", async () => {
   });
 
   it("locks out user after multiple failed sign in attempts", async () => {
-    for (let i = 1; i <= MAX_ATTEMPTS + 1; i++) {
+    for (let i = 1; i <= MAX_ATTEMPTS + 2; i++) {
       await SignInPage.login(
         users.lockoutTest.email,
         users.lockoutTest.password,

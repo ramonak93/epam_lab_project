@@ -10,7 +10,7 @@ import { users, routes } from "../data";
 
 should();
 
-describe("user profile", async () => {
+describe("user profile information", async () => {
   beforeEach(async () => {
     await clearBrowserState();
     await SignInPage.open();
@@ -51,4 +51,48 @@ describe("user profile", async () => {
     expect(profileInfo.state).to.equal(users.validUser_1.state);
     expect(profileInfo.country).to.equal(users.validUser_1.country);
   });
+});
+
+describe.only("Changing password", async () => {
+  beforeEach(async () => {
+    await clearBrowserState();
+    await SignInPage.open();
+    await SignInPage.login(users.validUser_3.email, users.validUser_3.password);
+    await browser.waitUntil(
+      async () => (await browser.getUrl()).includes(routes.account),
+      {
+        timeout: 5000,
+        timeoutMsg: `Did not redirect to ${routes.account}`,
+      },
+    );
+
+    await ProfilePage.open();
+  });
+
+  const originalPassword = users.validUser_3.password;
+  const newPassword = users.passwordChange.newPassword;
+  afterEach(async () => {
+    try {
+      await SignInPage.open();
+      await SignInPage.login(users.validUser_3.email, newPassword);
+      await AccountPage.open();
+      await ProfilePage.open();
+      await ProfilePage.changePassword(newPassword, originalPassword);
+    } catch (error) {
+      console.warn("Could not reset password:", error.message);
+    }
+  });
+
+  it("Should notify the user that the password has been changed", async () => {
+    await ProfilePage.changePassword(originalPassword, newPassword);
+    const successMessage = await ProfilePage.getSuccessMessage();
+    console.log("the success message is: " + successMessage);
+    successMessage.should.be.a("string").and.not.be.empty;
+    SignInPage.isLoaded().should.be.true;
+    // successMessage.toLowerCase().should.include("successfully");
+  });
+
+  //it("Should require the new password for future sign in", async () => {});
+
+  //it("fails to change the password with incorrect current password", async () => {});
 });

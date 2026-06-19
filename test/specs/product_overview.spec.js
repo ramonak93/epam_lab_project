@@ -1,5 +1,5 @@
 /*
- * UC-1 Sign in Validation (Positive andNegative Testing)
+ * UC-1 Product Overview testing
  * Practicing EXPECT, SHOULD and ASSERT interfaces of Chai assertion library
  */
 
@@ -25,6 +25,14 @@ describe("product overview", async () => {
       .to.include(routes.productDetails)
       .and.include(productId);
   });
-  it("search for a product by name", async () => {});
+
+  it("search for a product by name", async () => {
+    const searchTerm = "Pliers";
+    await HomePage.searchForProduct(searchTerm);
+    const searchresultCaption = await HomePage.searchCaption.getText();
+
+    searchresultCaption.should.include(searchTerm);
+  });
+
   it("navigate between pages of products", async () => {});
 });

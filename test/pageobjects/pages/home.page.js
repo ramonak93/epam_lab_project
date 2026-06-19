@@ -7,12 +7,35 @@ class HomePage extends BasePage {
     super(routes.home);
   }
 
+  get searchQueryInput() {
+    return $("#search-query");
+  }
+
+  get searchBtn() {
+    return $('[data-test="search-submit"]');
+  }
+
+  get searchCaption() {
+    return $('[data-test="search-caption"]');
+  }
+
   get productCards() {
     return $$('.card[data-test^="product-"]');
   }
 
+  async searchForProduct(productName) {
+    await this.searchQueryInput.setValue(productName);
+    await this.searchBtn.click();
+
+    await browser.waitUntil(async () => (await this.productCards).length >= 0, {
+      timeout: 5000,
+      timeoutMsg: "Search results did not load",
+    });
+  }
+
   async selectRandomProductId() {
-    const randomIndex = Math.floor(Math.random() * CARDS_PER_PAGE);
+    const randomIndex = Math.floor(Math.random() * CARDS_PER_PAGE + 1);
+    console.log("rand int: " + randomIndex);
     const myButton = await $(
       `.card[data-test^='product-']:nth-child(${randomIndex})`,
     );
@@ -28,6 +51,8 @@ class HomePage extends BasePage {
       console.warn("Can't click the element: " + e);
     }
   }
+
+  async productName() {}
 }
 
 export default new HomePage();

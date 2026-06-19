@@ -4,7 +4,7 @@
  */
 
 import { expect, should, assert } from "chai";
-import { HomePage, ProductDetailPage } from "../pageobjects";
+import { HomePage } from "../pageobjects";
 import { clearBrowserState, waitForRedirect } from "../helpers";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 import homePage from "../pageobjects/pages/home.page";
@@ -34,5 +34,13 @@ describe("product overview", async () => {
     searchresultCaption.should.include(searchTerm);
   });
 
-  it("navigate between pages of products", async () => {});
+  it("navigate between pages of products", async () => {
+    const page1Ids = await HomePage.getAllCardIds();
+    await HomePage.nextPageBtn.click();
+    const page2Ids = await HomePage.getAllCardIds();
+
+    const overlap = page2Ids.filter((id) => page1Ids.includes(id));
+
+    assert.notEqual(page1Ids, page2Ids);
+  });
 });

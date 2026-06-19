@@ -1,5 +1,4 @@
 export async function clearBrowserState() {
-  // Must be on a page with same-origin to access storage
   const currentUrl = await browser.getUrl();
   if (!currentUrl.startsWith("http")) {
     await browser.url("/");

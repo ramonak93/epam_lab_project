@@ -23,6 +23,23 @@ class HomePage extends BasePage {
     return $$('.card[data-test^="product-"]');
   }
 
+  get nextPageBtn() {
+    return $('.page-item .page-link[aria-label="Next"]');
+  }
+
+  async waitForCardsToLoad() {
+    await browser.waitUntil(
+      async () => {
+        const cards = await this.productCards;
+        return cards.length >= 1;
+      },
+      {
+        timeout: 5000,
+        timeoutMsg: `Expected at least 1 product card to load`,
+      },
+    );
+  }
+
   async searchForProduct(productName) {
     await this.searchQueryInput.setValue(productName);
     await this.searchBtn.click();
@@ -35,7 +52,6 @@ class HomePage extends BasePage {
 
   async selectRandomProductId() {
     const randomIndex = Math.floor(Math.random() * CARDS_PER_PAGE + 1);
-    console.log("rand int: " + randomIndex);
     const myButton = await $(
       `.card[data-test^='product-']:nth-child(${randomIndex})`,
     );
@@ -52,7 +68,37 @@ class HomePage extends BasePage {
     }
   }
 
-  async productName() {}
+  async goToNextPage() {
+    const currentFirstId = (await this.getAllCardIds())[0];
+
+    await this.nextPageButton.scrollIntoView();
+    await this.nextPageButton.click();
+
+    await browser.waitUntil(
+      async () => {
+        const cards = await this.productCards;
+        if (cards.length === 0) return false;
+        const firstDataTest = await cards[0].getAttribute("data-test");
+        return firstDataTest !== `product-${currentFirstId}`;
+      },
+      {
+        timeout: 10000,
+        timeoutMsg: "Page did not navigate — products did not change",
+      },
+    );
+  }
+
+  async getAllCardIds() {
+    await this.waitForCardsToLoad();
+    const cards = await this.productCards;
+
+    const ids = [];
+    for (const card of cards) {
+      const dataTest = await card.getAttribute("data-test");
+      ids.push(dataTest.replace("product-", ""));
+    }
+    return ids;
+  }
 }
 
 export default new HomePage();

@@ -39,8 +39,6 @@ describe("product overview", async () => {
     await HomePage.nextPageBtn.click();
     const page2Ids = await HomePage.getAllCardIds();
 
-    const overlap = page2Ids.filter((id) => page1Ids.includes(id));
-
     assert.notEqual(page1Ids, page2Ids);
   });
 });

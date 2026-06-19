@@ -50,6 +50,7 @@ export const config = {
   capabilities: [
     {
       browserName: "firefox",
+      pageLoadStrategy: "eager",
     },
   ],
 
@@ -130,6 +131,7 @@ export const config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60000,
+    retries: 1,
   },
 
   //

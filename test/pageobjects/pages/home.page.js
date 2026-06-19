@@ -7,6 +7,19 @@ class HomePage extends BasePage {
     super(routes.home);
   }
 
+  async open() {
+    await super.open();
+
+    await browser.execute(() => {
+      try {
+        localStorage.clear();
+        sessionStorage.clear();
+      } catch (e) {
+        /* ignore potential issues if storage is not available */
+      }
+    });
+  }
+
   get searchQueryInput() {
     return $("#search-query");
   }

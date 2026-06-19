@@ -8,7 +8,6 @@ class SignInPage extends BasePage {
 
   async open() {
     await super.open();
-    await this.waitForPageToLoad();
   }
 
   get emailInput() {

@@ -19,11 +19,9 @@ export const users = {
     lastName: "Howe",
   },
 
-  validUser_3: {
+  lockoutTest: {
     email: "customer3@practicesoftwaretesting.com",
-    password: "pass123",
-    firstName: "Bob",
-    lastName: "Smith",
+    password: "wrongPassword",
   },
 
   passwordChange: {
@@ -41,10 +39,5 @@ export const users = {
   invalidCredentials: {
     email: "nonexistent@example.com",
     password: "WrongPassword123!",
-  },
-
-  lockoutTest: {
-    email: "customer3@practicesoftwaretesting.com",
-    password: "wrongPassword",
   },
 };

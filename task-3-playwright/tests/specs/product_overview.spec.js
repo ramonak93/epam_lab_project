@@ -15,7 +15,13 @@ test.describe("product overview", () => {
     await expect(page).toHaveURL(`/product/${productCardId}`);
   });
   test("should navigate between pages of products", async ({ page }) => {
-    //click nextPage
-    // validate: product Ids changed
+    const homePage = new HomePage(page);
+    await homePage.goto();
+    const page1Ids = await homePage.getAllCardIds();
+    // console.log("page1: " + page1Ids);
+    await homePage.goToNextPage();
+    const page2Ids = await homePage.getAllCardIds();
+    // console.log("page2: " + page2Ids);
+    await expect(page2Ids).not.toEqual(page1Ids);
   });
 });

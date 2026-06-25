@@ -7,6 +7,7 @@ export class HomePage extends BasePage {
     super(page);
     this.route = routes.home;
     this.productCards = page.locator('a[data-test^="product-"]');
+    this.nextPageButton = page.locator('[data-test="pagination-next"]');
   }
 
   async goto() {
@@ -46,5 +47,19 @@ export class HomePage extends BasePage {
 
     const card = this.page.locator(`[data-test="product-${cardId}"]`);
     await card.click();
+  }
+
+  async getAllCardIds() {
+    const dataTests = await this.productCards.evaluateAll((nodes) =>
+      nodes.map((n) => n.getAttribute("data-test")),
+    );
+
+    return dataTests.map((dt) => dt.replace("product-", ""));
+  }
+
+  async goToNextPage() {
+    await this.nextPageButton.click();
+    // await this.productCards.first().waitFor({ state: "visible" });
+    await this.page.waitForTimeout(15000);
   }
 }

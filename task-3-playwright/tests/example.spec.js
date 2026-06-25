@@ -1,21 +1,18 @@
 // @ts-check
 import { test, expect } from "@playwright/test";
 
-test("has title", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+test.describe("sign in", () => {
+  test("successfully signs in as admin with valid credentials", async ({
+    page,
+  }) => {});
+  test("fails to sign user in with invalid credentials", async ({
+    page,
+  }) => {});
 });
 
-test("get started link", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Click the get started link.
-  await page.getByRole("link", { name: "Get started" }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(
-    page.getByRole("heading", { name: "Installation" }),
-  ).toBeVisible();
+test.describe("sign in", () => {
+  test("should navigate to product detail when product card is clicked", async ({
+    page,
+  }) => {});
+  test("should navigate between pages of products", async ({ page }) => {});
 });

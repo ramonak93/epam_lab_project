@@ -4,10 +4,10 @@
  */
 
 import { expect, should, assert } from "chai";
-import { HomePage } from "../pageobjects";
+import { HomePage } from "../../pageobjects";
 import { clearBrowserState, waitForRedirect } from "../helpers";
 import { users, routes, MAX_ATTEMPTS } from "../data";
-import homePage from "../pageobjects/pages/home.page";
+import homePage from "../../pageobjects/pages/home.page";
 
 should();
 

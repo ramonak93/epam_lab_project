@@ -1,5 +1,5 @@
 import BasePage from "./base.page.js";
-import { routes } from "../../data/routes.js";
+import { routes } from "../../test/data/routes.js";
 
 class AccountPage extends BasePage {
   constructor() {

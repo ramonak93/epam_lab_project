@@ -4,7 +4,7 @@
  */
 
 import { expect, should, assert } from "chai";
-import { SignInPage, AccountPage, AdminDashboardPage } from "../pageobjects";
+import { SignInPage, AccountPage, AdminDashboardPage } from "../../pageobjects";
 import { clearBrowserState, waitForRedirect } from "../helpers";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 

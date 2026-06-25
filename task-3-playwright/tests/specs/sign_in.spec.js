@@ -8,16 +8,22 @@ test.describe("sign in", () => {
   }) => {
     // open sign in page
     const signInPage = new SignInPage(page);
-    signInPage.goto(routes.login);
+    await signInPage.goto(routes.login);
 
     // inset email and pass
-    signInPage.login(users.admin.email, users.admin.password);
+    await signInPage.login(users.admin.email, users.admin.password);
     // validate
-    await expect(page).toHaveURL(
-      "https://practicesoftwaretesting.com/admin/dashboard",
-    );
+    await expect(page).toHaveURL(routes.adminDashboard);
   });
-  test("fails to sign user in with invalid credentials", async ({
-    page,
-  }) => {});
+  test("fails to sign user in with invalid credentials", async ({ page }) => {
+    const signInPage = new SignInPage(page);
+    await signInPage.goto(routes.login);
+
+    await signInPage.login(
+      users.invalidCredentials.email,
+      users.invalidCredentials.password,
+    );
+
+    await expect(page).toHaveURL(routes.login);
+  });
 });

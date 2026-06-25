@@ -11,12 +11,7 @@ export class SignInPage extends BasePage {
     this.emailError = page.locator("#email-error");
     this.passwordError = page.locator("#password-error");
     this.loginError = page.locator('[data-test="login-error"]');
-
-    // this.email = users.validUser_1.email;
-    // this.password = users.validUser_1.password;
   }
-
-  //   async goto(route) {}
 
   async login(email, password) {
     await this.emailInput.fill(email);

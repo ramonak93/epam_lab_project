@@ -1,6 +1,5 @@
 import { BasePage } from "./base.page";
 import { routes } from "../tests/data/index";
-import { test } from "@playwright/test";
 
 export class SignInPage extends BasePage {
   constructor(page) {

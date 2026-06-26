@@ -1,4 +1,3 @@
-import { test } from "@playwright/test";
 import { BasePage } from "./Base.page";
 import { routes } from "../tests/data/routes";
 

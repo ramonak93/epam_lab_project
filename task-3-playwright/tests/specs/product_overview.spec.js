@@ -1,7 +1,6 @@
 import { test, expect } from "../fixtures/pages.fixture";
 import { SignInPage } from "../../pages/sign_in.page";
 import { HomePage } from "../../pages/home.page";
-import { routes, users } from "../data/index";
 
 test.describe("product overview", () => {
   test("should navigate to product detail when card is clicked", async ({
@@ -21,6 +20,6 @@ test.describe("product overview", () => {
     await homePage.goToNextPage();
     const page2Ids = await homePage.getAllCardIds();
 
-    await expect(page2Ids).not.toEqual(page1Ids);
+    expect(page2Ids).not.toEqual(page1Ids);
   });
 });

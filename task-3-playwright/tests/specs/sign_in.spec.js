@@ -3,18 +3,23 @@ import { SignInPage } from "../../pages/sign_in.page";
 import { routes, users } from "../data/index";
 
 test.describe("sign in", () => {
+  // test.beforeEach(async ({ page }) => {
+  //   const signInPage = new SignInPage(page);
+  //   await signInPage.open();
+  // });
+
   test("successfully signs in as admin with valid credentials", async ({
     page,
   }) => {
     const signInPage = new SignInPage(page);
-    await signInPage.goto(routes.login);
+    await signInPage.open();
     await signInPage.login(users.admin.email, users.admin.password);
 
     await expect(page).toHaveURL(routes.adminDashboard);
   });
   test("fails to sign user in with invalid credentials", async ({ page }) => {
     const signInPage = new SignInPage(page);
-    await signInPage.goto(routes.login);
+    await signInPage.open();
     await signInPage.login(
       users.invalidCredentials.email,
       users.invalidCredentials.password,

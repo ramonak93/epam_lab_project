@@ -5,7 +5,7 @@ export class BasePage {
     this.page = page;
   }
 
-  async goto(url = "https://practicesoftwaretesting.com") {
+  async open(url = "https://practicesoftwaretesting.com") {
     await this.page.goto(url);
   }
 }

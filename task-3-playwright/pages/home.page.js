@@ -10,8 +10,8 @@ export class HomePage extends BasePage {
     this.nextPageButton = page.locator('[data-test="pagination-next"]');
   }
 
-  async goto() {
-    await this.page.goto(this.route);
+  async open() {
+    await super.open(this.route);
     await this.productCards.first().waitFor({ state: "visible" });
   }
 
@@ -58,8 +58,12 @@ export class HomePage extends BasePage {
   }
 
   async goToNextPage() {
+    const firstCard = this.productCards.first();
+    const firstCardId = await firstCard.getAttribute("data-test");
+
     await this.nextPageButton.click();
-    // await this.productCards.first().waitFor({ state: "visible" });
-    await this.page.waitForTimeout(15000);
+    await this.page
+      .locator(`[data-test="${firstCardId}"]`)
+      .waitFor({ state: "detached" }, 10000);
   }
 }

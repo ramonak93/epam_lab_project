@@ -13,7 +13,7 @@ describe("Sign in", () => {
     cy.url().should("include", routes.account);
   });
 
-  it.only("fails to sign in user with missing credentials", () => {
+  it("fails to sign in user with missing credentials", () => {
     signInPage.open();
     signInPage.loginButton.click();
     cy.url().should("include", routes.login);
@@ -26,5 +26,12 @@ describe("Sign in", () => {
       .should("be.visible")
       .and("include.text", "Password is required");
   });
-  it("lockout user after repeated failed sign in attempts", () => {});
+  it("lockout user after repeated failed sign in attempts", () => {
+    signInPage.open();
+    for (let i = 1; i <= 4; i++) {
+      signInPage.login(users.lockoutTest.email, users.lockoutTest.password);
+    }
+
+    signInPage.loginError.should("be.visible").and("include.text", "lock");
+  });
 });

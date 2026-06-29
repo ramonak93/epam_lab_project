@@ -22,9 +22,13 @@ class SignInPage extends BasePage {
     return cy.get('[data-test="password-error"]');
   }
 
+  get loginError() {
+    return cy.get('[data-test="login-error"]');
+  }
+
   login(email, password) {
-    this.emailInput.type(email);
-    this.passwordInput.type(password);
+    this.emailInput.clear().type(email);
+    this.passwordInput.clear().type(password);
     this.loginButton.click();
   }
 }

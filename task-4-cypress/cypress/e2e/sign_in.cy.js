@@ -5,16 +5,17 @@ import SignInPage from "../support/page_objects/sign_in.page";
 const signInPage = new SignInPage();
 
 describe("Sign in", () => {
-  it("should successfully sign in user with valid credentials", () => {
-    // cy.visit("");
+  beforeEach(() => {
     signInPage.open();
+  });
+
+  it("should successfully sign in user with valid credentials", () => {
     signInPage.login(users.validUser_1.email, users.validUser_1.password);
 
     cy.url().should("include", routes.account);
   });
 
   it("fails to sign in user with missing credentials", () => {
-    signInPage.open();
     signInPage.loginButton.click();
     cy.url().should("include", routes.login);
 
@@ -27,7 +28,6 @@ describe("Sign in", () => {
       .and("include.text", "Password is required");
   });
   it("lockout user after repeated failed sign in attempts", () => {
-    signInPage.open();
     for (let i = 1; i <= 4; i++) {
       signInPage.login(users.lockoutTest.email, users.lockoutTest.password);
     }

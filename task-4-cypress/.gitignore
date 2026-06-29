@@ -1,0 +1,7 @@
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+cypress/results/
+cypress/reports/
+cypress/.cache/

@@ -7,7 +7,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:chrome": "cypress run --headless --browser chrome",
+    "cy:firefox": "cypress run --headless --browser firefox",
+    "cy:edge": "cypress run --headless --browser edge"
   },
   "dependencies": {
     "cypress": "^15.18.0"

@@ -1,4 +1,4 @@
-import { BasePage } from "./base.page";
+import BasePage from "./base.page";
 import { routes } from "../data/routes";
 
 class HomePage extends BasePage {

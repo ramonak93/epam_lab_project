@@ -5,7 +5,7 @@
 
 import { expect, should, assert } from "chai";
 import { HomePage } from "../../pageobjects";
-import { clearBrowserState, waitForRedirect } from "../helpers";
+import { waitForRedirect } from "../helpers/wait.helper";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 import homePage from "../../pageobjects/pages/home.page";
 
@@ -13,7 +13,6 @@ should();
 
 describe("product overview", async () => {
   beforeEach(async () => {
-    await clearBrowserState();
     await HomePage.open();
   });
 

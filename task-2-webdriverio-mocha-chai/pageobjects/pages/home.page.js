@@ -9,15 +9,6 @@ class HomePage extends BasePage {
 
   async open() {
     await super.open();
-
-    await browser.execute(() => {
-      try {
-        localStorage.clear();
-        sessionStorage.clear();
-      } catch (e) {
-        /* ignore potential issues if storage is not available */
-      }
-    });
   }
 
   get searchQueryInput() {
@@ -57,7 +48,7 @@ class HomePage extends BasePage {
     await this.searchQueryInput.setValue(productName);
     await this.searchBtn.click();
 
-    await browser.waitUntil(async () => (await this.productCards).length >= 0, {
+    await browser.waitUntil(async () => (await this.productCards).length >= 1, {
       timeout: 5000,
       timeoutMsg: "Search results did not load",
     });
@@ -72,20 +63,21 @@ class HomePage extends BasePage {
     return id.replace("product-", "");
   }
 
-  async clickRandomCard(cardId) {
+  async clickCardByID(cardId) {
     const element = await $(`.card[data-test="product-${cardId}"]`);
     try {
-      element.click();
+      await element.click();
     } catch (e) {
       console.warn("Can't click the element: " + e);
+      throw e;
     }
   }
 
   async goToNextPage() {
     const currentFirstId = (await this.getAllCardIds())[0];
 
-    await this.nextPageButton.scrollIntoView();
-    await this.nextPageButton.click();
+    await this.nextPageBtn.scrollIntoView();
+    await this.nextPageBtn.click();
 
     await browser.waitUntil(
       async () => {

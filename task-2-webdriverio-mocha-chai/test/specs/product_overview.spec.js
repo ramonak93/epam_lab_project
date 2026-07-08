@@ -19,7 +19,7 @@ describe("product overview", async () => {
 
   it("should navigate to product detail when product card is clicked", async () => {
     const productId = await HomePage.selectRandomProductId();
-    await HomePage.clickRandomCard(productId);
+    await HomePage.clickCardByID(productId);
     await waitForRedirect(routes.productDetails);
     expect(await browser.getUrl())
       .to.include(routes.productDetails)

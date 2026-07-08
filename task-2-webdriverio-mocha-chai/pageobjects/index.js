@@ -1,4 +1,5 @@
-export { default as HomePage } from "./pages/home.page.js";
-export { default as SignInPage } from "./pages/sign_in.page.js";
-export { default as AccountPage } from "./pages/account.page.js";
-export { default as AdminDashboardPage } from "./pages/admin_dashboard.page.js";
+export { default as homePage } from "./pages/home.page.js";
+export { default as signInPage } from "./pages/sign_in.page.js";
+export { default as accountPage } from "./pages/account.page.js";
+export { default as adminDashboardPage } from "./pages/admin_dashboard.page.js";
+export { default as productDetailsPage } from "./pages/product_details.page.js";

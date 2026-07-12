@@ -1,0 +1,17 @@
+{
+  "name": "task-5-api-testing",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.6"
+  },
+  "dependencies": {
+    "chai": "^6.2.2"
+  }
+}

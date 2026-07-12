@@ -5,7 +5,7 @@ Feature: Booking API
         Then the response status should be success
         And an authentication token is returned
 
-    Scenario: Create a booking
+    Scenario: Successfully create a booking
         Given a valid booking request
         When the booking is created
         Then the response status should be success

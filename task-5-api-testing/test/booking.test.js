@@ -63,7 +63,24 @@ describe("Booking", () => {
     expect(updateResponse).to.deep.include(bookingData.updated);
   });
 
-  it("should fail to update an existing booking without valid authentication", async () => {});
+  it.only("should fail to update an existing booking without valid authentication", async () => {
+    //create
+    const { request: createRequest, response: createResponse } =
+      await httpRequest(api.booking, "POST", undefined, bookingData.original);
+    const bookingId = await createResponse.bookingid;
+
+    //update
+    const { request: updateRequest, response: updateResponse } =
+      await httpRequest(
+        `${api.booking}/${bookingId}`,
+        "PUT",
+        undefined,
+        bookingData.updated,
+      );
+
+    expect(updateRequest.status).to.not.be.equal(200);
+    expect(updateResponse).to.include("Forbidden");
+  });
 
   it("should delete an existing booking with valid authentication", async () => {});
 });

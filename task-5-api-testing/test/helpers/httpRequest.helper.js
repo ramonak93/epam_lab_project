@@ -12,6 +12,7 @@ export async function httpRequest(
     headers: headers,
     body: JSON.stringify(body),
   });
-  const response = await request.json();
+
+  const response = request.ok ? await request.json() : await request.text();
   return { request, response };
 }

@@ -1,84 +1,69 @@
 import { expect } from "chai";
+import { httpRequest } from "./helpers/httpRequest.helper.js";
 import { users } from "./data/users.js";
-import { endpoints } from "./data/endpoints.js";
-import { booking } from "./data/booking.js";
+import { api } from "./data/api.js";
+import { bookingData } from "./data/bookingData.js";
 
 describe("Booking", () => {
   it("should generate an authentication token", async () => {
-    const response = await fetch(endpoints.auth, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(users.validUser),
-    });
+    const { request, response } = await httpRequest(
+      api.auth,
+      "POST",
+      undefined,
+      users.validUser,
+    );
 
-    const result = await response.json();
-
-    expect(response.status).to.equal(200);
-    expect(result).has.property("token");
-    expect(result.token).to.not.be.empty;
+    expect(request.status).to.equal(200);
+    expect(response).has.property("token");
+    expect(response.token).to.not.be.empty;
   });
 
   it("should create a booking", async () => {
-    const response = await fetch(endpoints.booking, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    });
+    const { request, response } = await httpRequest(
+      api.booking,
+      "POST",
+      undefined,
+      bookingData.original,
+    );
 
-    const result = await response.json();
-
-    expect(response.status).to.equal(200);
-    expect(result.booking).to.deep.include(booking);
+    expect(request.status).to.equal(200);
+    expect(response.booking).to.deep.include(bookingData.original);
   });
 
-  it.only("should update an existing booking with valid authentication", async () => {
+  it("should update an existing booking with valid authentication", async () => {
     //auth
-    const auth = await fetch(endpoints.auth, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(users.validUser),
-    });
+    const { request: authRequest, response: authResponse } = await httpRequest(
+      api.auth,
+      "POST",
+      undefined,
+      users.validUser,
+    );
+    const token = authResponse.token;
 
-    const authResult = await auth.json();
-    const token = authResult.token;
+    //create
+    const myHeader = {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    };
 
-    // create
-    const newBooking = await fetch(endpoints.booking, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    });
-    const createResult = await newBooking.json();
-    const bookingId = await createResult.bookingid;
+    const { request: createRequest, response: createResponse } =
+      await httpRequest(api.booking, "POST", myHeader, bookingData.original);
+    const bookingId = await createResponse.bookingid;
 
-    // update
-    const updateResponse = await fetch(`${endpoints.booking}/${bookingId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        // prettier-ignore
-        "Cookie": `token=${token}`,
-      },
-      body: JSON.stringify(booking),
-    });
+    //update
+    const { request: updateRequest, response: updateResponse } =
+      await httpRequest(
+        `${api.booking}/${bookingId}`,
+        "PUT",
+        myHeader,
+        bookingData.updated,
+      );
 
-    const updateResult = await updateResponse.json();
-    expect(updateResponse.status).to.be.equal(200);
+    expect(updateRequest.status).to.be.equal(200);
+    expect(updateResponse).to.deep.include(bookingData.updated);
   });
 
-  it("should fail to update an existing booking without valid authentication", async () => {
-    expect(users.admin.username).to.equal("admin");
-  });
+  it("should fail to update an existing booking without valid authentication", async () => {});
 
-  it("should delete an existing booking with valid authentication", async () => {
-    expect(users.admin.username).to.equal("admin");
-  });
+  it("should delete an existing booking with valid authentication", async () => {});
 });

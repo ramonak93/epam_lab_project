@@ -1,22 +1,38 @@
 import { expect } from "chai";
-import { data } from "./data/data.js";
+import { users } from "./data/users.js";
+import { endpoints } from "./data/endpoints.js";
+import { booking } from "./data/booking.js";
 
 describe("Booking", () => {
-  it.only("should generate an authentication token", async () => {
-    const response = await fetch(data.url, {
+  it("should generate an authentication token", async () => {
+    const response = await fetch(endpoints.auth, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data.validUser),
+      body: JSON.stringify(users.validUser),
     });
 
-    const body = await response.json();
+    const result = await response.json();
+
     expect(response.status).to.equal(200);
+    expect(result).has.property("token");
+    expect(result.token).to.not.be.empty;
   });
 
-  it("should create a booking", async () => {
-    expect(users.admin.username).to.equal("admin");
+  it.only("should create a booking", async () => {
+    const response = await fetch(endpoints.booking, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    });
+
+    const result = await response.json();
+
+    expect(response.status).to.equal(200);
+    expect(result.booking).to.deep.include(booking);
   });
 
   it("should update an existing booking with valid authentication", async () => {

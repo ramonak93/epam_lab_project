@@ -12,6 +12,7 @@ describe("Create features", () => {
     const result = await request.json();
 
     expect(request.status).to.equal(200);
+    expect(request.headers.get("content-type")).to.include("application/json");
     expect(result).has.property("token");
     expect(result.token).to.not.be.empty;
   });

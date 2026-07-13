@@ -1,10 +1,7 @@
 import { expect } from "chai";
-import { httpRequest } from "./helpers/httpRequest.helper.js";
-import { createToken } from "./helpers/createToken.js";
-import { createBooking } from "./helpers/createBooking.js";
-import { updateBooking } from "./helpers/updateBooking.js";
-import { deleteBooking } from "./helpers/deleteBooking.js";
-import { getBooking } from "./helpers/getBooking.js";
+
+//prettier-ignore
+import {createToken, createBooking, updateBooking, deleteBooking, getBooking} from "./helpers/index.js";
 import { users } from "./data/users.js";
 import { api } from "./data/api.js";
 import { bookingData } from "./data/bookingData.js";

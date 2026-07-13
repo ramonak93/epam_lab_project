@@ -78,14 +78,12 @@ describe("Update and delete features", () => {
   });
 
   it("should delete an existing booking with valid authentication", async () => {
-    //delete
     const deleteRequest = await deleteBooking(
       `${api.booking}/${bookingId}`,
       myHeader,
     );
     expect(deleteRequest.status).to.be.equal(201);
 
-    //get
     const request = await getBooking(`${api.booking}/${bookingId}`);
     const result = await request.text();
 

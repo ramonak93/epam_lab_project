@@ -3,7 +3,7 @@ import { expect } from "chai";
 //prettier-ignore
 import {createToken, createBooking, updateBooking, deleteBooking, getBooking} from "./helpers/index.js";
 import { users } from "../data/users.js";
-import { api } from "../data/api.js";
+import { api } from "../data/endpoints.js";
 import { bookingData } from "../data/bookingData.js";
 
 describe("Create features", () => {

@@ -1,5 +1,5 @@
 import { BaseApi } from "./base.api";
-import { api } from "../data/api";
+import { api } from "../data/endpoints";
 
 export class AuthApi extends BaseApi {
   constructor() {
@@ -9,11 +9,9 @@ export class AuthApi extends BaseApi {
   async createToken(credentials) {
     return this.request(api.authApi, {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
-
       body: JSON.stringify(credentials),
     });
   }

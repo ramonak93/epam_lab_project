@@ -1,5 +1,5 @@
 import { BaseApi } from "./base.api";
-import { api } from "../data/api";
+import { api } from "../data/endpoints";
 
 export class BookingApi extends BaseApi {
   constructor() {
@@ -17,9 +17,29 @@ export class BookingApi extends BaseApi {
     });
   }
 
-  async getBooking(bookingId) {}
+  async getBooking(bookingId) {
+    return this.request(`${api.bookingApi}${bookingId}`, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+    });
+  }
 
-  async updateBooking(body) {}
+  async updateBooking(bookingId, token, body) {
+    return this.request(`${api.bookingApi}${bookingId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Cokkie: `token=${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+  }
 
-  async deleteBooking(bokkingId) {}
+  async deleteBooking(bookingId, token) {
+    return this.request(`${api.bookingApi}${bookingId}`, {
+      method: "GET",
+      headers: { Cokkie: `token=${token}` },
+    });
+  }
 }

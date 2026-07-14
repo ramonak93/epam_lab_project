@@ -2,9 +2,9 @@ import { expect } from "chai";
 
 //prettier-ignore
 import {createToken, createBooking, updateBooking, deleteBooking, getBooking} from "./helpers/index.js";
-import { users } from "./data/users.js";
-import { api } from "./data/api.js";
-import { bookingData } from "./data/bookingData.js";
+import { users } from "../data/users.js";
+import { api } from "../data/api.js";
+import { bookingData } from "../data/bookingData.js";
 
 describe("Create features", () => {
   it("should generate an authentication token", async () => {
@@ -32,7 +32,6 @@ describe("Update and delete features", () => {
   let myHeader;
 
   beforeEach(async () => {
-    //get an auth token
     const authRequest = await createToken(api.auth, users.validUser);
     const authResult = await authRequest.json();
 
@@ -43,7 +42,6 @@ describe("Update and delete features", () => {
       Cookie: `token=${token}`,
     };
 
-    //create a booking
     const createRequest = await createBooking(
       api.booking,
       bookingData.original,

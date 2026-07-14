@@ -1,20 +1,25 @@
 import { expect } from "chai";
 
 //prettier-ignore
-import {createToken, createBooking, updateBooking, deleteBooking, getBooking} from "./helpers/index.js";
+// import {createToken, createBooking, updateBooking, deleteBooking, getBooking} from "./helpers/index.js";
+import { BookingApi } from "../api/booking.api.js";
+import { AuthApi } from "../api/auth.api.js";
 import { users } from "../data/users.js";
 import { api } from "../data/endpoints.js";
 import { bookingData } from "../data/bookingData.js";
 
-describe("Create features", () => {
-  it("should generate an authentication token", async () => {
-    const request = await createToken(api.auth, users.validUser);
-    const result = await request.json();
+const bookingApi = new BookingApi();
+const authApi = new AuthApi();
 
-    expect(request.status).to.equal(200);
-    expect(request.headers.get("content-type")).to.include("application/json");
-    expect(result).has.property("token");
-    expect(result.token).to.not.be.empty;
+describe("Create features", () => {
+  it.only("should generate an authentication token", async () => {
+    const response = await authApi.createToken(users.validUser);
+    const parsedResponse = await response.json();
+
+    expect(response.status).to.equal(200);
+    expect(response.headers.get("content-type")).to.include("application/json");
+    expect(parsedResponse).has.property("token");
+    expect(parsedResponse.token).to.not.be.empty;
   });
 
   it("should create a booking", async () => {

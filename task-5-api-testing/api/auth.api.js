@@ -1,5 +1,5 @@
-import { BaseApi } from "./base.api";
-import { api } from "../data/endpoints";
+import { BaseApi } from "./base.api.js";
+import { api } from "../data/endpoints.js";
 
 export class AuthApi extends BaseApi {
   constructor() {

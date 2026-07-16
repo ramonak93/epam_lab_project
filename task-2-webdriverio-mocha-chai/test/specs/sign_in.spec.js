@@ -4,43 +4,46 @@
  */
 
 import { expect, should, assert } from "chai";
-import { SignInPage, AccountPage, AdminDashboardPage } from "../../pageobjects";
-import { clearBrowserState, waitForRedirect } from "../helpers";
+import {
+  signInPage,
+  accountPage,
+  adminDashboardPage,
+  productDetailsPage,
+} from "../../pageobjects";
 import { users, routes, MAX_ATTEMPTS } from "../data";
 
 should();
 
 describe("Sign In", async () => {
   beforeEach(async () => {
-    await clearBrowserState();
-    await SignInPage.open();
+    await signInPage.open();
   });
 
   it("successfully signs in as user with valid credentials", async () => {
-    await SignInPage.login(users.validUser_1.email, users.validUser_1.password);
-    await waitForRedirect(routes.account);
+    await signInPage.login(users.validUser_1.email, users.validUser_1.password);
+    await accountPage.waitForRedirect();
 
-    expect(await AccountPage.isLoaded()).to.be.true;
+    expect(await accountPage.isLoaded()).to.be.true;
   });
 
   it("successfully signs in as admin with valid credentials", async () => {
-    await SignInPage.login(users.admin.email, users.admin.password);
-    await waitForRedirect(routes.adminDashboard);
+    await signInPage.login(users.admin.email, users.admin.password);
+    await adminDashboardPage.waitForRedirect();
 
-    expect(await AdminDashboardPage.isLoaded()).to.be.true;
+    expect(await adminDashboardPage.isLoaded()).to.be.true;
   });
 
   it("fails to sign user in with missing credentials", async () => {
-    await SignInPage.login("", "");
+    await signInPage.login("", "");
 
     const currrentUrl = await browser.getUrl();
     currrentUrl.should.include(routes.login);
 
-    await SignInPage.emailError.waitForDisplayed({ timeout: 5000 });
-    const emailErrorDisplayed = await SignInPage.emailError.isDisplayed();
-    const passwordErrorDisplayed = await SignInPage.passwordError.isDisplayed();
-    const emailErrorText = await SignInPage.emailError.getText();
-    const passwordErrorText = await SignInPage.passwordError.getText();
+    await signInPage.emailError.waitForDisplayed({ timeout: 5000 });
+    const emailErrorDisplayed = await signInPage.emailError.isDisplayed();
+    const passwordErrorDisplayed = await signInPage.passwordError.isDisplayed();
+    const emailErrorText = await signInPage.emailError.getText();
+    const passwordErrorText = await signInPage.passwordError.getText();
 
     emailErrorDisplayed.should.be.true;
     emailErrorText.should.include("Email");
@@ -49,15 +52,15 @@ describe("Sign In", async () => {
   });
 
   it("fails to sign user in with invalid credentials", async () => {
-    await SignInPage.login(
+    await signInPage.login(
       users.invalidCredentials.email,
       users.invalidCredentials.password,
     );
-    await SignInPage.loginError.waitForDisplayed({ timeout: 5000 });
+    await signInPage.loginError.waitForDisplayed({ timeout: 5000 });
 
     const currrentUrl = await browser.getUrl();
-    const loginErrorDisplayed = await SignInPage.loginError.isDisplayed();
-    const loginErrorText = await SignInPage.loginError.getText();
+    const loginErrorDisplayed = await signInPage.loginError.isDisplayed();
+    const loginErrorText = await signInPage.loginError.getText();
 
     currrentUrl.should.include(routes.login);
     loginErrorDisplayed.should.be.true;
@@ -67,16 +70,16 @@ describe("Sign In", async () => {
   // bugged functionality, may lock out after 1 attempt or show wrong user alert
   it("locks out user after multiple failed sign in attempts", async () => {
     for (let i = 1; i <= MAX_ATTEMPTS + 2; i++) {
-      await SignInPage.login(
+      await signInPage.login(
         users.lockoutTest.email,
         users.lockoutTest.password,
       );
 
-      await SignInPage.loginError.waitForDisplayed({ timeout: 5000 });
+      await signInPage.loginError.waitForDisplayed({ timeout: 5000 });
     }
 
-    const loginErrorDisplayed = await SignInPage.loginError.isDisplayed();
-    const loginErrorText = await SignInPage.loginError.getText();
+    const loginErrorDisplayed = await signInPage.loginError.isDisplayed();
+    const loginErrorText = await signInPage.loginError.getText();
 
     assert.isTrue(
       loginErrorDisplayed,

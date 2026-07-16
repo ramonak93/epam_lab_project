@@ -1,5 +1,5 @@
 import { BaseApi } from "./base.api.js";
-import { api } from "../data/endpoints.js";
+import { endpoints } from "../data/endpoints.js";
 
 export class BookingApi extends BaseApi {
   constructor() {
@@ -7,7 +7,7 @@ export class BookingApi extends BaseApi {
   }
 
   async createBooking(body) {
-    return this.request(api.bookingApi, {
+    return this.request(endpoints.bookingApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,14 +18,14 @@ export class BookingApi extends BaseApi {
   }
 
   async getBooking(bookingId) {
-    return this.request(`${api.bookingApi}/${bookingId}`, {
+    return this.request(`${endpoints.bookingApi}/${bookingId}`, {
       method: "GET",
       headers: { Accept: "application/json" },
     });
   }
 
   async updateBooking(bookingId, token, body) {
-    return this.request(`${api.bookingApi}/${bookingId}`, {
+    return this.request(`${endpoints.bookingApi}/${bookingId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export class BookingApi extends BaseApi {
   }
 
   async deleteBooking(bookingId, token) {
-    return this.request(`${api.bookingApi}/${bookingId}`, {
+    return this.request(`${endpoints.bookingApi}/${bookingId}`, {
       method: "DELETE",
       headers: { Cookie: `token=${token}` },
     });

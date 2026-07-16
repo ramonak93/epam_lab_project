@@ -1,5 +1,4 @@
 import { test, expect } from "../fixtures/pages.fixture.js";
-import { SignInPage } from "../../pages/sign_in.page.js";
 import { routes, users } from "../data/index";
 
 test.describe("sign in", () => {

@@ -1,5 +1,5 @@
 import { BasePage } from "./Base.page";
-import { routes } from "../tests/data/routes";
+import { routes } from "../data/routes";
 
 export class HomePage extends BasePage {
   constructor(page) {

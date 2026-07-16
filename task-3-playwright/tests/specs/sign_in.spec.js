@@ -1,5 +1,5 @@
 import { test, expect } from "../fixtures/pages.fixture.js";
-import { routes, users } from "../data/index";
+import { routes, users } from "../../data/index.js";
 
 test.describe("sign in", () => {
   test("successfully signs in as admin with valid credentials", async ({

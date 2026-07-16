@@ -1,5 +1,5 @@
 export const users = {
-  validUser_1: {
+  validUser1: {
     firstName: "Jane",
     lastName: "Doe",
     email: "customer2@practicesoftwaretesting.com",
@@ -12,7 +12,7 @@ export const users = {
     country: "Austria",
   },
 
-  validUser_2: {
+  validUser2: {
     email: "customer2@practicesoftwaretesting.com",
     password: "welcome01",
     firstName: "Jack",

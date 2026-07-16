@@ -4,12 +4,7 @@
  */
 
 import { expect, should, assert } from "chai";
-import {
-  signInPage,
-  accountPage,
-  adminDashboardPage,
-  productDetailsPage,
-} from "../../pageobjects";
+import { signInPage, accountPage, adminDashboardPage } from "../../pageobjects";
 import { users, routes, MAX_ATTEMPTS } from "../../data";
 
 should();
@@ -20,7 +15,7 @@ describe("Sign In", async () => {
   });
 
   it("successfully signs in as user with valid credentials", async () => {
-    await signInPage.login(users.validUser_1.email, users.validUser_1.password);
+    await signInPage.login(users.validUser1.email, users.validUser1.password);
     await accountPage.waitForRedirect();
 
     expect(await accountPage.isLoaded()).to.be.true;
@@ -36,8 +31,8 @@ describe("Sign In", async () => {
   it("fails to sign user in with missing credentials", async () => {
     await signInPage.login("", "");
 
-    const currrentUrl = await browser.getUrl();
-    currrentUrl.should.include(routes.login);
+    const currentUrl = await browser.getUrl();
+    currentUrl.should.include(routes.login);
 
     await signInPage.emailError.waitForDisplayed({ timeout: 5000 });
     const emailErrorDisplayed = await signInPage.emailError.isDisplayed();
@@ -58,16 +53,15 @@ describe("Sign In", async () => {
     );
     await signInPage.loginError.waitForDisplayed({ timeout: 5000 });
 
-    const currrentUrl = await browser.getUrl();
+    const currentUrl = await browser.getUrl();
     const loginErrorDisplayed = await signInPage.loginError.isDisplayed();
     const loginErrorText = await signInPage.loginError.getText();
 
-    currrentUrl.should.include(routes.login);
+    currentUrl.should.include(routes.login);
     loginErrorDisplayed.should.be.true;
     loginErrorText.should.match(/^(?=.*\bemail\b)(?=.*\bpassword\b).*$/gm);
   });
 
-  // bugged functionality, may lock out after 1 attempt or show wrong user alert
   it("locks out user after multiple failed sign in attempts", async () => {
     for (let i = 1; i <= MAX_ATTEMPTS + 2; i++) {
       await signInPage.login(

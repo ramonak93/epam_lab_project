@@ -1,6 +1,6 @@
-import { routes } from "../support/data/routes";
-import { users } from "../support/data/users";
-import SignInPage from "../support/page_objects/sign_in.page";
+import { routes } from "../data/routes";
+import { users } from "../data/users";
+import SignInPage from "../pages/sign_in.page";
 
 const signInPage = new SignInPage();
 

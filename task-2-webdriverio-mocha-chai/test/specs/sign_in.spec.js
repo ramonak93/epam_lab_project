@@ -10,7 +10,7 @@ import {
   adminDashboardPage,
   productDetailsPage,
 } from "../../pageobjects";
-import { users, routes, MAX_ATTEMPTS } from "../data";
+import { users, routes, MAX_ATTEMPTS } from "../../data";
 
 should();
 

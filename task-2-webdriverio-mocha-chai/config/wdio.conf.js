@@ -130,8 +130,21 @@ export const config = {
       {
         addConsoleLogs: true,
         showPreface: false,
-        realtimeReporting: true,
+        // realtimeReporting: true,
         color: true,
+      },
+    ],
+    [
+      "allure",
+      {
+        outputDir: "./allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+        addConsoleLogs: true, // Attach console logs to reports
+        reportedEnvironmentVars: {
+          NODE_VERSION: process.version,
+          BROWSER: "chrome",
+        },
       },
     ],
   ],

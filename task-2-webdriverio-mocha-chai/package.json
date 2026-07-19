@@ -2,6 +2,7 @@
   "name": "lab_project_siarhei_ramanishkin",
   "type": "module",
   "devDependencies": {
+    "@wdio/allure-reporter": "^9.29.1",
     "@wdio/cli": "^9.28.0",
     "@wdio/local-runner": "^9.28.0",
     "@wdio/mocha-framework": "^9.28.0",
@@ -12,5 +13,9 @@
     "test": "wdio run ./config/wdio.conf.js",
     "test:sign-in": "wdio run ./config/wdio.conf.js --spec ./test/specs/sign_in.spec.js",
     "test:product-overview": "wdio run ./config/wdio.conf.js --spec ./test/specs/product_overview.spec.js"
+  },
+  "dependencies": {
+    "allure": "^3.14.3",
+    "allure-commandline": "^2.43.0"
   }
 }

@@ -1,12 +1,12 @@
 import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
-import playwright from "eslint-plugin-playwright";
 import globals from "globals";
+import pluginCypress from "eslint-plugin-cypress";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig([
 	{
-		ignores: ["node_modules/", "playwright-report", "test-results"],
+		ignores: ["node_modules/", "cypress/reports/", "cypress/screenshots/", "cypress/downloads/"],
 	},
 
 	{
@@ -20,8 +20,8 @@ export default defineConfig([
 	js.configs.recommended,
 
 	{
-		files: ["tests/**"],
-		extends: [playwright.configs["flat/recommended"]],
+		files: ["cypress/**/*.js", "cypress.config.js"],
+		extends: [pluginCypress.configs.recommended],
 	},
 
 	eslintConfigPrettier,

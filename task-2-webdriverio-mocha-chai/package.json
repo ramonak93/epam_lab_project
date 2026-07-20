@@ -12,6 +12,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-mocha": "^11.3.0",
 		"eslint-plugin-wdio": "^9.29.1",
+		"globals": "^17.7.0",
 		"prettier": "^3.9.5"
 	},
 	"scripts": {
@@ -22,8 +23,5 @@
 		"lint:fix": "eslint . --fix",
 		"lint:prettier": "prettier . --check",
 		"lint:prettier:fix": "prettier . --write"
-	},
-	"dependencies": {
-		"eslint-plugin-chai-friendly": "^1.2.1"
 	}
 }

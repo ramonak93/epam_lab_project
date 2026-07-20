@@ -2,56 +2,52 @@ import BasePage from "./base.page.js";
 import { routes } from "../../test/data/routes.js";
 
 class SignInPage extends BasePage {
-  constructor() {
-    super(routes.login);
-  }
+	constructor() {
+		super(routes.login);
+	}
 
-  async open() {
-    await super.open();
+	async open() {
+		await super.open();
 
-    await browser.execute(() => {
-      try {
-        localStorage.clear();
-        sessionStorage.clear();
-      } catch (e) {
-        /* ignore potential issues if storage is not available */
-      }
-    });
-  }
+		await browser.execute(() => {
+			localStorage.clear();
+			sessionStorage.clear();
+		});
+	}
 
-  get emailInput() {
-    return $("#email");
-  }
+	get emailInput() {
+		return $("#email");
+	}
 
-  get passwordInput() {
-    return $("#password");
-  }
+	get passwordInput() {
+		return $("#password");
+	}
 
-  get signInButton() {
-    return $("input[value='Login']");
-  }
+	get signInButton() {
+		return $("input[value='Login']");
+	}
 
-  get emailError() {
-    return $("#email-error");
-  }
+	get emailError() {
+		return $("#email-error");
+	}
 
-  get passwordError() {
-    return $("#password-error");
-  }
+	get passwordError() {
+		return $("#password-error");
+	}
 
-  get loginError() {
-    return $("div[data-test='login-error']");
-  }
+	get loginError() {
+		return $("div[data-test='login-error']");
+	}
 
-  async login(email, password) {
-    await this.emailInput.setValue(email);
-    await this.passwordInput.setValue(password);
-    await this.signInButton.click();
-  }
+	async login(email, password) {
+		await this.emailInput.setValue(email);
+		await this.passwordInput.setValue(password);
+		await this.signInButton.click();
+	}
 
-  async isLoaded() {
-    return this.signInButton.isDisplayed();
-  }
+	async isLoaded() {
+		return this.signInButton.isDisplayed();
+	}
 }
 
 export default new SignInPage();

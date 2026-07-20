@@ -1,23 +1,33 @@
 {
-  "name": "task-2-playwright",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "playwright test",
-    "test:chrome": "playwright test --project=chromium",
-    "test:firefox": "playwright test --project=firefox",
-    "test:safari": "playwright test --project=webkit",
-    "test:all": "playwright test --project=chromium --project=firefox --project=webkit",
-    "test:headed": "playwright test --headed",
-    "report": "playwright show-report"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "@playwright/test": "^1.61.1",
-    "@types/node": "^26.0.1"
-  }
+	"name": "task-2-playwright",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "playwright test",
+		"test:chrome": "playwright test --project=chromium",
+		"test:firefox": "playwright test --project=firefox",
+		"test:safari": "playwright test --project=webkit",
+		"test:all": "playwright test --project=chromium --project=firefox --project=webkit",
+		"test:headed": "playwright test --headed",
+		"report": "playwright show-report",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"lint:prettier": "prettier . --check",
+		"lint:prettier:fix": "prettier . --write"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@playwright/test": "^1.61.1",
+		"@types/node": "^26.0.1",
+		"eslint": "^10.7.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-playwright": "^2.10.5",
+		"globals": "^17.7.0",
+		"prettier": "^3.9.5"
+	}
 }

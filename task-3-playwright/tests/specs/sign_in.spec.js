@@ -1,25 +1,16 @@
 import { test, expect } from "../fixtures/pages.fixture.js";
-import { SignInPage } from "../../pages/sign_in.page.js";
 import { routes, users } from "../data/index";
 
 test.describe("sign in", () => {
-  test("successfully signs in as admin with valid credentials", async ({
-    page,
-    signInPage,
-  }) => {
-    await signInPage.login(users.admin.email, users.admin.password);
+	test("successfully signs in as admin with valid credentials", async ({ page, signInPage }) => {
+		await signInPage.login(users.admin.email, users.admin.password);
 
-    await expect(page).toHaveURL(routes.adminDashboard);
-  });
-  test("fails to sign user in with invalid credentials", async ({
-    page,
-    signInPage,
-  }) => {
-    await signInPage.login(
-      users.invalidCredentials.email,
-      users.invalidCredentials.password,
-    );
+		await expect(page).toHaveURL(routes.adminDashboard);
+	});
 
-    await expect(page).toHaveURL(routes.login);
-  });
+	test("fails to sign user in with invalid credentials", async ({ page, signInPage }) => {
+		await signInPage.login(users.invalidCredentials.email, users.invalidCredentials.password);
+
+		await expect(page).toHaveURL(routes.login);
+	});
 });

@@ -13,7 +13,9 @@
     "cy:edge": "cypress run --headless --browser edge"
   },
   "dependencies": {
-    "cypress": "^15.18.0",
+    "cypress": "^15.18.0"
+  },
+  "devDependencies": {
     "mochawesome": "^7.1.4",
     "cypress-multi-reporters": "^2.0.5"
   }

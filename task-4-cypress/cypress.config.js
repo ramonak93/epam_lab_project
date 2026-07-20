@@ -1,7 +1,10 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-  reporter: "spec",
+  reporter: "cypress-multi-reporters",
+  reporterOptions: {
+    configFile: "reporter-config.json",
+  },
   allowCypressEnv: false,
   defaultBrowser: "firefox",
 

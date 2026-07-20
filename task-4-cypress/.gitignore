@@ -5,3 +5,5 @@ cypress/downloads/
 cypress/results/
 cypress/reports/
 cypress/.cache/
+mochawesome-report/
+cypress/reports/mochawesome-report

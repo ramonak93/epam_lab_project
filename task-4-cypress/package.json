@@ -1,30 +1,30 @@
 {
-  "name": "task-4-cypress",
-  "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:chrome": "cypress run --headless --browser chrome",
-    "cy:firefox": "cypress run --headless --browser firefox",
-    "cy:edge": "cypress run --headless --browser edge",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint:prettier": "prettier . --check",
-    "lint:prettier:fix": "prettier . --write"
-  },
-  "dependencies": {
-    "cypress": "^15.18.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.7.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-cypress": "^6.4.3",
-    "globals": "^17.7.0",
-    "prettier": "^3.9.5"
-  }
+	"name": "task-4-cypress",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"cy:chrome": "cypress run --headless --browser chrome",
+		"cy:firefox": "cypress run --headless --browser firefox",
+		"cy:edge": "cypress run --headless --browser edge",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"lint:prettier": "prettier . --check",
+		"lint:prettier:fix": "prettier . --write"
+	},
+	"dependencies": {
+		"cypress": "^15.18.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.7.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-cypress": "^6.4.3",
+		"globals": "^17.7.0",
+		"prettier": "^3.9.5"
+	}
 }

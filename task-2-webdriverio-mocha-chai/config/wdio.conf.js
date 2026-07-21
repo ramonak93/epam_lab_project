@@ -125,26 +125,36 @@ export const config = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
+    // [
+    //   "spec",
+    //   {
+    //     addConsoleLogs: true,
+    //     showPreface: false,
+    //     // realtimeReporting: true,
+    //     color: true,
+    //   },
+    // ],
+    // [
+    //   "allure",
+    //   {
+    //     outputDir: "./allure-results",
+    //     disableWebdriverStepsReporting: true,
+    //     disableWebdriverScreenshotsReporting: true,
+    //     addConsoleLogs: true, // Attach console logs to reports
+    //     reportedEnvironmentVars: {
+    //       NODE_VERSION: process.version,
+    //       BROWSER: "chrome",
+    //     },
+    //   },
+    // ],
     [
-      "spec",
+      "html-nice",
       {
-        addConsoleLogs: true,
-        showPreface: false,
-        // realtimeReporting: true,
-        color: true,
-      },
-    ],
-    [
-      "allure",
-      {
-        outputDir: "./allure-results",
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
-        addConsoleLogs: true, // Attach console logs to reports
-        reportedEnvironmentVars: {
-          NODE_VERSION: process.version,
-          BROWSER: "chrome",
-        },
+        outputDir: "./reports/",
+        filename: "report.html",
+        reportTitle: "My Amazing Report",
+        linkScreenshots: true,
+        useOnAfterCommandForScreenshot: false,
       },
     ],
   ],

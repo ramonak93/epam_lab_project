@@ -1,5 +1,5 @@
 import { BasePage } from "./base.page";
-import { routes } from "../tests/data/index";
+import { routes } from "../data/index";
 
 export class SignInPage extends BasePage {
   constructor(page) {

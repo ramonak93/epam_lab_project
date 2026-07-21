@@ -3,7 +3,6 @@ import { expect } from "chai";
 import { BookingApi } from "../api/booking.api.js";
 import { AuthApi } from "../api/auth.api.js";
 import { users } from "../data/users.js";
-import { api } from "../data/endpoints.js";
 import { bookingData } from "../data/bookingData.js";
 
 const bookingApi = new BookingApi();

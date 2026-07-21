@@ -4,7 +4,7 @@
  */
 
 import { expect, should, assert } from "chai";
-import { users, routes, MAX_ATTEMPTS } from "../data";
+import { routes, MAX_ATTEMPTS } from "../../data";
 import { homePage, productDetailsPage } from "../../pageobjects/index.js";
 
 should();

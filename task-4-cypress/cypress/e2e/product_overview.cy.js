@@ -1,4 +1,4 @@
-import HomePage from "../support/page_objects/home.page";
+import HomePage from "../pages/home.page";
 
 const homePage = new HomePage();
 

@@ -1,6 +1,4 @@
 import { test, expect } from "../fixtures/pages.fixture";
-import { SignInPage } from "../../pages/sign_in.page";
-import { HomePage } from "../../pages/home.page";
 
 test.describe("product overview", () => {
   test("should navigate to product detail when card is clicked", async ({

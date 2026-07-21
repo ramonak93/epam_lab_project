@@ -15,7 +15,7 @@ class HomePage extends BasePage {
   }
 
   get searchreset() {
-    return cy.get('[data-test="search-submit"]');
+    return cy.get('[data-test="search-reset"]');
   }
 
   get searchCaption() {

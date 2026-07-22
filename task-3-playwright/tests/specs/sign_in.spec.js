@@ -7,17 +7,10 @@ test.describe("Sign in", () => {
 
 		await expect(page).toHaveURL(routes.adminDashboard);
 	});
-
-	test("fails to sign user in with invalid credentials", async ({ page, signInPage }) => {
-		await signInPage.login(users.invalidCredentials.email, users.invalidCredentials.password);
-		await expect(page).toHaveURL(routes.adminDashboard);
-	});
-
 	test("fails to sign user in with invalid credentials", async ({ page, signInPage }) => {
 		await signInPage.login(users.invalidCredentials.email, users.invalidCredentials.password);
 
-		await expect(page).toHaveURL(routes.login);
-	});
 		await expect(page).toHaveURL(routes.login);
 	});
 });
+``;

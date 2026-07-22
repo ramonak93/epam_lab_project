@@ -43,6 +43,9 @@ class SignInPage extends BasePage {
 		await this.emailInput.waitForDisplayed({timeout: 10000});
 		console.log('Current URL:', await browser.getUrl());
 		console.log('Page title:', await browser.getTitle());
+		console.log('Email exists:', await this.emailInput.isExisting());
+		console.log('Email displayed:', await this.emailInput.isDisplayed());
+		await browser.saveScreenshot("./screenshot.png");
 		await this.emailInput.setValue(email);
 		await this.passwordInput.setValue(password);
 		await this.signInButton.click();

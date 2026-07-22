@@ -128,38 +128,34 @@ export const config = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
-    // [
-    //   "spec",
-    //   {
-    //     addConsoleLogs: true,
-    //     showPreface: false,
-    //     // realtimeReporting: true,
-    //     color: true,
-    //   },
-    // ],
-    // [
-    //   "allure",
-    //   {
-    //     outputDir: "./allure-results",
-    //     disableWebdriverStepsReporting: true,
-    //     disableWebdriverScreenshotsReporting: true,
-    //     addConsoleLogs: true, // Attach console logs to reports
-    //     reportedEnvironmentVars: {
-    //       NODE_VERSION: process.version,
-    //       BROWSER: "chrome",
-    //     },
-    //   },
-    // ],
+    [
+      "spec",
+      {
+        addConsoleLogs: true,
+        showPreface: false,
+        // realtimeReporting: true,
+        color: true,
+      },
+    ],
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+        addConsoleLogs: true,
+      },
+    ],
     [
       "html-nice",
       {
         outputDir: "./reports/html-reports/",
-        filename: "report.html",
+        filename: "nice-report.html",
         reportTitle: "My Amazing Report",
         showInBrowser: true,
         linkScreenshots: true,
         useOnAfterCommandForScreenshot: true,
-        produceJson: true
+        produceJson: true,
       },
     ],
   ],
@@ -191,7 +187,7 @@ export const config = {
       filename: "master-report.html",
       reportTitle: "Master Report",
       browserName: capabilities.browserName,
-       collapseTests: true
+      collapseTests: true,
     });
     await reportAggregator.clean();
   },

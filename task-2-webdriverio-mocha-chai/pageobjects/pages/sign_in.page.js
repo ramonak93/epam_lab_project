@@ -40,14 +40,15 @@ class SignInPage extends BasePage {
 	}
 
 	async login(email, password) {
+		const myEmailInput = await $("#email");
+		const myPasswordInput = await("#password");
 		await this.emailInput.waitForDisplayed({timeout: 10000});
 		console.log('Current URL:', await browser.getUrl());
 		console.log('Page title:', await browser.getTitle());
-		console.log('Email exists:', await this.emailInput.isExisting());
-		console.log('Email displayed:', await this.emailInput.isDisplayed());
-		await browser.saveScreenshot("./screenshots/login.png");
-		await this.emailInput.setValue(email);
-		await this.passwordInput.setValue(password);
+		console.log('Email exists:', await myEmailInput.isExisting());
+		console.log('Email displayed:', await myPasswordInput.isDisplayed());
+		await myEmailInput.setValue(email);
+		await myPasswordInput.setValue(password);
 		await this.signInButton.click();
 	}
 

@@ -50,7 +50,6 @@ export const config = {
 	capabilities: [
 		{
 			browserName: "firefox",
-			pageLoadStrategy: "eager",
 		},
 	],
 

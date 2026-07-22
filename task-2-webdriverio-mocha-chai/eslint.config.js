@@ -2,7 +2,7 @@ import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 import mochaPlugin from "eslint-plugin-mocha";
-import { configs as wdioConfig } from "eslint-plugin-wdio";
+// import { configs as wdioConfig } from "eslint-plugin-wdio";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig([
@@ -14,6 +14,11 @@ export default defineConfig([
 		languageOptions: {
 			globals: {
 				...globals.node,
+				browser: "readonly",
+				driver: "readonly",
+				$: "readonly",
+				$$: "readonly",
+				expect: "readonly",
 			},
 		},
 	},
@@ -28,7 +33,7 @@ export default defineConfig([
 		},
 	},
 
-	wdioConfig["flat/recommended"],
+	// wdioConfig["flat/recommended"],
 
 	eslintConfigPrettier,
 ]);

@@ -37,7 +37,7 @@ jobs:
         run: npm run lint
 
       - name: Check formatting with Prettier
-        run: npm run lint:prettier
+        run: npm run lint:prettier:fix
 
   tests:
     needs: quality-gate

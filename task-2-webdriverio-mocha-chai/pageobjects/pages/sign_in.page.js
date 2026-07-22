@@ -40,6 +40,7 @@ class SignInPage extends BasePage {
 	}
 
 	async login(email, password) {
+		await this.isLoaded;
 		await this.emailInput.setValue(email);
 		await this.passwordInput.setValue(password);
 		await this.signInButton.click();

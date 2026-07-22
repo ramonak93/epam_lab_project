@@ -1,3 +1,6 @@
+import { ReportAggregator } from "wdio-html-nice-reporter";
+let reportAggregator;
+
 export const config = {
   //
   // ====================
@@ -150,11 +153,13 @@ export const config = {
     [
       "html-nice",
       {
-        outputDir: "./reports/",
+        outputDir: "./reports/html-reports/",
         filename: "report.html",
         reportTitle: "My Amazing Report",
+        showInBrowser: true,
         linkScreenshots: true,
-        useOnAfterCommandForScreenshot: false,
+        useOnAfterCommandForScreenshot: true,
+        produceJson: true
       },
     ],
   ],
@@ -180,8 +185,16 @@ export const config = {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: async function (config, capabilities) {
+    reportAggregator = new ReportAggregator({
+      outputDir: "./reports/html-reports/",
+      filename: "master-report.html",
+      reportTitle: "Master Report",
+      browserName: capabilities.browserName,
+       collapseTests: true
+    });
+    await reportAggregator.clean();
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -304,8 +317,9 @@ export const config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: async function () {
+    await reportAggregator.createReport();
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

@@ -1,17 +1,25 @@
 {
-  "name": "task-5-api-testing",
-  "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "module",
-  "scripts": {
-    "test": "mocha"
-  },
-  "devDependencies": {
-    "mocha": "^11.7.6"
-  },
-  "dependencies": {
-    "chai": "^6.2.2"
-  }
+	"name": "task-5-api-testing",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"scripts": {
+		"test": "mocha",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"lint:prettier": "prettier . --check",
+		"lint:prettier:fix": "prettier . --write"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"chai": "^6.2.2",
+		"eslint": "^10.7.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-mocha": "^11.3.0",
+		"globals": "^17.7.0",
+		"mocha": "^11.7.6",
+		"prettier": "^3.9.6"
+	}
 }

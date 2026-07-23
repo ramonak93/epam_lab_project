@@ -41,7 +41,7 @@ class SignInPage extends BasePage {
 
 	async login(email, password) {
 		const myEmailInput = await $("#email");
-		const myPasswordInput = await $("#password");
+		const myPasswordInput = await("#password");
 		await this.emailInput.waitForDisplayed({timeout: 10000});
 		console.log('Current URL:', await browser.getUrl());
 		console.log('Page title:', await browser.getTitle());

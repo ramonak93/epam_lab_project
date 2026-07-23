@@ -13,7 +13,6 @@ allure-results/
 allure-report/
 errorShots/
 reports/
-screenshots/
 
 # Environment files
 .env

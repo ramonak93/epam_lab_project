@@ -40,9 +40,7 @@ class SignInPage extends BasePage {
 	}
 
 	async login(email, password) {
-		await this.emailInput.waitForDisplayed({timeout: 10000});
-		console.log('Current URL:', await browser.getUrl());
-		console.log('Page title:', await browser.getTitle());
+		await this.isLoaded;
 		await this.emailInput.setValue(email);
 		await this.passwordInput.setValue(password);
 		await this.signInButton.click();

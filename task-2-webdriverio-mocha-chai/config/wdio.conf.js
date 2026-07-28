@@ -55,8 +55,15 @@ export const config = {
 	//
 	capabilities: [
 		{
-			browserName: "firefox",
-			pageLoadStrategy: "eager",
+			// browserName: "firefox",
+			// pageLoadStrategy: "eager",
+			browserName: "chrome",
+			"goog:chromeOptions": {
+				args: [
+					"--disable-blink-features=AutomationControlled", // Hides the navigator.webdriver property
+					"--start-maximized",
+				],
+			},
 		},
 	],
 

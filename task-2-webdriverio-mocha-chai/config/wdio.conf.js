@@ -234,12 +234,13 @@ export const config = {
 	 * @param {boolean} result.passed    true if test has passed, otherwise false
 	 * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
 	 */
-	afterTest: async function (test, context, {  passed }) {
+	afterTest: async function (test, context, { passed }) {
 		if (!passed) {
 			await fs.mkdir(screenshotsDir, { recursive: true });
 			const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 			const name = test.fullTitle.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "");
-			await browser.saveScreenshot(join(screenshotsDir, `${name}_${timestamp}.png`));
+			const screenshot = await browser.takeScreenshot();
+			await fs.writeFile(join(screenshotsDir, `${name}_${timestamp}.png`), screenshot, "base64");
 		}
 	},
 

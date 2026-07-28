@@ -67,3 +67,11 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: task-3-playwright/test-results/
+          if-no-files-found: ignore

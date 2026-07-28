@@ -64,3 +64,11 @@ jobs:
 
       - name: Run tests
         run: npm run cy:firefox
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: task-4-cypress/cypress/screenshots/
+          if-no-files-found: ignore

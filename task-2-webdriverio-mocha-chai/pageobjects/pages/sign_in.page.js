@@ -40,13 +40,14 @@ class SignInPage extends BasePage {
 	}
 
 	async login(email, password) {
-		await this.isLoaded;
+		await this.emailInput.waitForDisplayed({ timeout: 5000 });
 		await this.emailInput.setValue(email);
 		await this.passwordInput.setValue(password);
 		await this.signInButton.click();
 	}
 
 	async isLoaded() {
+		await this.emailInput.waitForDisplayed({ timeout: 5000 });
 		return this.signInButton.isDisplayed();
 	}
 }

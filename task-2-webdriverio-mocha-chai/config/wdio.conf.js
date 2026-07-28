@@ -57,25 +57,12 @@ export const config = {
 		{
 			// browserName: "firefox",
 			// pageLoadStrategy: "eager",
-			// browserName: "chrome",
-			// "goog:chromeOptions": {
-			// 	args: [
-			// 		"--disable-blink-features=AutomationControlled", // Hides the navigator.webdriver property
-			// 		"--start-maximized",
-			// 	],
-			// },
-			browserName: "firefox",
-			"moz:firefoxOptions": {
-				// Command-line arguments for Firefox
-				args: ["-start-maximized"],
-				// Internal browser settings to mask automation markers
-				prefs: {
-					// Set the automation flag to false
-					"dom.webdriver.enabled": false,
-					// Optional: Prevent specific tracking/fingerprinting that flags bots
-					"privacy.resistFingerprinting": false,
-					"marionette.enabled": true,
-				},
+			browserName: "chrome",
+			"goog:chromeOptions": {
+				args: [
+					"--disable-blink-features=AutomationControlled", // Hides the navigator.webdriver property
+					"--start-maximized",
+				],
 			},
 		},
 	],

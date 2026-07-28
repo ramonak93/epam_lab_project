@@ -4,12 +4,7 @@ class BasePage {
 	}
 
 	open() {
-		cy.visit((`https://practicesoftwaretesting.com${this.url}`), {
-			headers: {
-				"Accept" : "application/json, text/plain, */*",
-				"User-Agent": "axios/1.18.1"
-			}
-		})
+		cy.visit(`https://practicesoftwaretesting.com${this.url}`)
 	}
 }
 

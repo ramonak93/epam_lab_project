@@ -238,7 +238,7 @@ export const config = {
 		if (!passed) {
 			await fs.mkdir(screenshotsDir, { recursive: true });
 			const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-			const name = test.fullTitle.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "");
+			const name = test.title.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "");
 			const screenshot = await browser.takeScreenshot();
 			await fs.writeFile(join(screenshotsDir, `${name}_${timestamp}.png`), screenshot, "base64");
 		}

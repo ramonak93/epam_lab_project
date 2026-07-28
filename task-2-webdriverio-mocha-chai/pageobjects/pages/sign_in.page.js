@@ -40,7 +40,15 @@ class SignInPage extends BasePage {
 	}
 
 	async login(email, password) {
-		await this.emailInput.waitForDisplayed({ timeout: 5000 });
+		await browser.waitUntil(
+			async () => {
+				return this.emailInput.isDisplayed();
+			},
+			{
+				timeout: 15000,
+				timeoutMsg: `Expected at least 1 product card to load`,
+			}
+		);
 		await this.emailInput.setValue(email);
 		await this.passwordInput.setValue(password);
 		await this.signInButton.click();

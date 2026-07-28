@@ -11,7 +11,7 @@ class AccountPage extends BasePage {
 	}
 
 	async isLoaded() {
-		await this.pageTitle.waitForDisplayed({ timeout: 5000 });
+		await this.pageTitle.waitForDisplayed({ timeout: 15000 });
 		return this.pageTitle.isDisplayed();
 	}
 }

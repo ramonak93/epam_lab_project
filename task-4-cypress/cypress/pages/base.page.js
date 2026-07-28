@@ -4,14 +4,12 @@ class BasePage {
 	}
 
 	open() {
-		cy.visit((`https://practicesoftwaretesting.com${this.url}`), 
-		// {
-			// headers: {
-			// 	"Accept" : "application/json, text/plain, */*",
-			// 	"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-			// }
-		// }
-	)
+		cy.visit((`https://practicesoftwaretesting.com${this.url}`), {
+			headers: {
+				"Accept" : "application/json, text/plain, */*",
+				"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0"
+			}
+		})
 	}
 }
 

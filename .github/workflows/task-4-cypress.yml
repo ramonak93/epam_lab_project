@@ -63,7 +63,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run cy:chrome
+        run: npm run cy:firefox
 
       - name: Upload screenshots
         if: always()

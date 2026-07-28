@@ -13,6 +13,15 @@ class SignInPage extends BasePage {
 			localStorage.clear();
 			sessionStorage.clear();
 		});
+
+		await browser.waitUntil(
+			async () => {
+				return this.emailInput.isDisplayed();
+			},
+			{
+				timeout: 15000,
+			}
+		);
 	}
 
 	get emailInput() {
@@ -40,14 +49,6 @@ class SignInPage extends BasePage {
 	}
 
 	async login(email, password) {
-		await browser.waitUntil(
-			async () => {
-				return this.emailInput.isDisplayed();
-			},
-			{
-				timeout: 15000,
-			}
-		);
 		await this.emailInput.setValue(email);
 		await this.passwordInput.setValue(password);
 		await this.signInButton.click();

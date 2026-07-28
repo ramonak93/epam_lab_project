@@ -46,7 +46,6 @@ class SignInPage extends BasePage {
 			},
 			{
 				timeout: 15000,
-				timeoutMsg: `Expected at least 1 product card to load`,
 			}
 		);
 		await this.emailInput.setValue(email);

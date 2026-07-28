@@ -232,7 +232,7 @@ export const config = {
 	 */
 	afterTest: async function (test, context, {  passed }) {
 		if (!passed) {
-			await fs.mkdirSync("./screenshots", { recursive: true });
+			await fs.mkdir("./screenshots", { recursive: true });
 			const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 			const name = test.fullTitle.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "");
 			await browser.saveScreenshot(`./screenshots/${name}_${timestamp}.png`);

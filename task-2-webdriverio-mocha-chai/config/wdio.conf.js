@@ -1,4 +1,8 @@
 import fs from "node:fs/promises";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const screenshotsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "screenshots");
 
 export const config = {
 	//
@@ -232,10 +236,10 @@ export const config = {
 	 */
 	afterTest: async function (test, context, {  passed }) {
 		if (!passed) {
-			await fs.mkdir("./screenshots", { recursive: true });
+			await fs.mkdir(screenshotsDir, { recursive: true });
 			const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 			const name = test.fullTitle.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "");
-			await browser.saveScreenshot(`./screenshots/${name}_${timestamp}.png`);
+			await browser.saveScreenshot(join(screenshotsDir, `${name}_${timestamp}.png`));
 		}
 	},
 

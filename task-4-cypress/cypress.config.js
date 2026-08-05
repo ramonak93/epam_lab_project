@@ -1,8 +1,12 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-	allowCypressEnv: false,
-	defaultBrowser: "firefox",
+  reporter: "cypress-multi-reporters",
+  reporterOptions: {
+    configFile: "reporter-config.json",
+  },
+  allowCypressEnv: false,
+  defaultBrowser: "firefox",
 
 	e2e: {
 		baseUrl: "https://practicesoftwaretesting.com",

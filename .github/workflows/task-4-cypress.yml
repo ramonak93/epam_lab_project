@@ -1,0 +1,74 @@
+name: CI - Task 4 Cypress
+
+on:
+  push:
+    paths:
+      - "task-4-cypress/**"
+      - ".github/workflows/task-4-cypress.yml"
+  pull_request:
+    paths:
+      - "task-4-cypress/**"
+      - ".github/workflows/task-4-cypress.yml"
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./task-4-cypress
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: task-4-cypress
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: task-4-cypress/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check formatting with Prettier
+        run: npm run lint:prettier:fix
+
+  tests:
+    needs: quality-gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./task-4-cypress
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: task-4-cypress
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: task-4-cypress/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run cy:firefox
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: task-4-cypress/cypress/screenshots/
+          if-no-files-found: ignore

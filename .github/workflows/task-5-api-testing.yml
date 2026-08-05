@@ -1,0 +1,66 @@
+name: CI - Task 5 API Testing
+
+on:
+  push:
+    paths:
+      - "task-5-api-testing/**"
+      - ".github/workflows/task-5-api-testing.yml"
+  pull_request:
+    paths:
+      - "task-5-api-testing/**"
+      - ".github/workflows/task-5-api-testing.yml"
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./task-5-api-testing
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: task-5-api-testing
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: task-5-api-testing/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check formatting with Prettier
+        run: npm run lint:prettier:fix
+
+  tests:
+    needs: quality-gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./task-5-api-testing
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: task-5-api-testing
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: task-5-api-testing/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test

@@ -2,56 +2,62 @@ import BasePage from "./base.page.js";
 import { routes } from "../../data/routes.js";
 
 class SignInPage extends BasePage {
-  constructor() {
-    super(routes.login);
-  }
+	constructor() {
+		super(routes.login);
+	}
 
-  async open() {
-    await super.open();
+	async open() {
+		await super.open();
 
-    await browser.execute(() => {
-      try {
-        localStorage.clear();
-        sessionStorage.clear();
-      } catch (e) {
-        /* ignore potential issues if storage is not available */
-      }
-    });
-  }
+		await browser.execute(() => {
+			localStorage.clear();
+			sessionStorage.clear();
+		});
 
-  get emailInput() {
-    return $("#email");
-  }
+		await browser.waitUntil(
+			async () => {
+				return this.emailInput.isDisplayed();
+			},
+			{
+				timeout: 15000,
+			}
+		);
+	}
 
-  get passwordInput() {
-    return $("#password");
-  }
+	get emailInput() {
+		return $("#email");
+	}
 
-  get signInButton() {
-    return $("input[value='Login']");
-  }
+	get passwordInput() {
+		return $("#password");
+	}
 
-  get emailError() {
-    return $("#email-error");
-  }
+	get signInButton() {
+		return $("input[value='Login']");
+	}
 
-  get passwordError() {
-    return $("#password-error");
-  }
+	get emailError() {
+		return $("#email-error");
+	}
 
-  get loginError() {
-    return $("div[data-test='login-error']");
-  }
+	get passwordError() {
+		return $("#password-error");
+	}
 
-  async login(email, password) {
-    await this.emailInput.setValue(email);
-    await this.passwordInput.setValue(password);
-    await this.signInButton.click();
-  }
+	get loginError() {
+		return $("div[data-test='login-error']");
+	}
 
-  async isLoaded() {
-    return this.signInButton.isDisplayed();
-  }
+	async login(email, password) {
+		await this.emailInput.setValue(email);
+		await this.passwordInput.setValue(password);
+		await this.signInButton.click();
+	}
+
+	async isLoaded() {
+		await this.emailInput.waitForDisplayed({ timeout: 5000 });
+		return this.signInButton.isDisplayed();
+	}
 }
 
 export default new SignInPage();

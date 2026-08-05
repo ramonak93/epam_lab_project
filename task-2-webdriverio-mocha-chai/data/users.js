@@ -1,43 +1,43 @@
 export const users = {
-  validUser1: {
-    firstName: "Jane",
-    lastName: "Doe",
-    email: "customer2@practicesoftwaretesting.com",
-    password: "welcome01",
-    phone: "",
-    street: "Test street 98",
-    postalCode: "",
-    city: "Vienna",
-    state: "",
-    country: "Austria",
-  },
+	validUser1: {
+		firstName: "Jane",
+		lastName: "Doe",
+		email: "customer2@practicesoftwaretesting.com",
+		password: "welcome01",
+		phone: "",
+		street: "Test street 98",
+		postalCode: "",
+		city: "Vienna",
+		state: "",
+		country: "Austria",
+	},
 
-  validUser2: {
-    email: "customer2@practicesoftwaretesting.com",
-    password: "welcome01",
-    firstName: "Jack",
-    lastName: "Howe",
-  },
+	validUser2: {
+		email: "customer2@practicesoftwaretesting.com",
+		password: "welcome01",
+		firstName: "Jack",
+		lastName: "Howe",
+	},
 
-  lockoutTest: {
-    email: "customer3@practicesoftwaretesting.com",
-    password: "wrongPassword",
-  },
+	lockoutTest: {
+		email: "customer3@practicesoftwaretesting.com",
+		password: "wrongPassword",
+	},
 
-  passwordChange: {
-    newPassword: "LabasVakaras99!!",
-    wrongCurrentPassword: "invalidPassword2!",
-  },
+	passwordChange: {
+		newPassword: "LabasVakaras99!!",
+		wrongCurrentPassword: "invalidPassword2!",
+	},
 
-  admin: {
-    email: "admin@practicesoftwaretesting.com",
-    password: "welcome01",
-    firstName: "John",
-    lastName: "Doe",
-  },
+	admin: {
+		email: "admin@practicesoftwaretesting.com",
+		password: "welcome01",
+		firstName: "John",
+		lastName: "Doe",
+	},
 
-  invalidCredentials: {
-    email: "nonexistent@example.com",
-    password: "WrongPassword123!",
-  },
+	invalidCredentials: {
+		email: "nonexistent@example.com",
+		password: "WrongPassword123!",
+	},
 };

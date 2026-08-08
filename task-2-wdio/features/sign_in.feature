@@ -4,6 +4,7 @@ Feature: Sign in
   Background:
     Given the user is on the sign in page
 
+  @positive
   Scenario Outline: User successfully signs in with valid credentials
     Given a registered user with email "<Email>" and password "<Password>"
     When the user signs in
@@ -13,11 +14,13 @@ Feature: Sign in
       | Email                                | Password  |
       | customer@practicesoftwaretesting.com | welcome01 |
 
+  @positive
   Scenario: Admin successfully signs in with valid credentials
     Given a registered admin user
     When the admin signs in
     Then the admin is granted access to the dashboard
 
+  @negative
   Scenario Outline: Sign in attempt with missing credentials
     Given the credentials "<Email>" and "<Password>"
     When the user attempts to sign in
@@ -29,6 +32,7 @@ Feature: Sign in
       | customer@practicesoftwaretesting.com |           |
       |                                      |           |
 
+  @negative
   Scenario Outline: Sign in attempt with invalid credentials
     Given the credentials "<Email>" and "<Password>"
     When the user attempts to sign in
@@ -39,6 +43,7 @@ Feature: Sign in
       | unknown@practicesoftwaretesting.com  | welcome01 |
       | customer@practicesoftwaretesting.com | wrongpass |
 
+  @negative
   Scenario: Account lockout after repeated failed sign in attempts
     Given a registered user
     When the user attempts to sign in with incorrect credentials 3 times

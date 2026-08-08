@@ -1,3 +1,4 @@
+@sign_in
 Feature: Sign in
 
   Background:

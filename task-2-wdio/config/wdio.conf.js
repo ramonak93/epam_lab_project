@@ -3,8 +3,8 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const screenshotsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "screenshots");
-import { ReportAggregator } from "wdio-html-nice-reporter";
-let reportAggregator;
+// import { ReportAggregator } from "wdio-html-nice-reporter";
+// let reportAggregator;
 
 export const config = {
 	//
@@ -28,7 +28,7 @@ export const config = {
 	// The path of the spec files will be resolved relative from the directory of
 	// of the config file unless it's absolute.
 	//
-	specs: ["../test/specs/**/*.spec.js"],
+	specs: ["../features/**/*.feature"],
 	// Patterns to exclude.
 	exclude: [
 		// 'path/to/excluded/files'
@@ -57,15 +57,15 @@ export const config = {
 	//
 	capabilities: [
 		{
-			// browserName: "firefox",
-			// pageLoadStrategy: "eager",
-			browserName: "chrome",
-			"goog:chromeOptions": {
-				args: [
-					"--disable-blink-features=AutomationControlled", // Hides the navigator.webdriver property
-					"--start-maximized",
-				],
-			},
+			browserName: "firefox",
+			pageLoadStrategy: "eager",
+			// browserName: "chrome",
+			// "goog:chromeOptions": {
+			// 	args: [
+			// 		"--disable-blink-features=AutomationControlled", // Hides the navigator.webdriver property
+			// 		"--start-maximized",
+			// 	],
+			// },
 		},
 	],
 
@@ -124,60 +124,65 @@ export const config = {
 	//
 	// Make sure you have the wdio adapter package for the specific framework installed
 	// before running any tests.
-	framework: "mocha",
+	framework: "cucumber",
 
-  //
-  // The number of times to retry the entire specfile when it fails as a whole
-  // specFileRetries: 1,
-  //
-  // Delay in seconds between the spec file retry attempts
-  // specFileRetriesDelay: 0,
-  //
-  // Whether or not retried spec files should be retried immediately or deferred to the end of the queue
-  // specFileRetriesDeferred: false,
-  //
-  // Test reporter for stdout.
-  // The only one supported by default is 'dot'
-  // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [
-    [
-      "spec",
-      {
-        addConsoleLogs: true,
-        showPreface: false,
-        // realtimeReporting: true,
-        color: true,
-      },
-    ],
-    [
-      "allure",
-      {
-        outputDir: "allure-results",
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
-        addConsoleLogs: true,
-      },
-    ],
-    [
-      "html-nice",
-      {
-        outputDir: "./reports/html-reports/",
-        filename: "nice-report.html",
-        reportTitle: "My Amazing Report",
-        showInBrowser: true,
-        linkScreenshots: true,
-        useOnAfterCommandForScreenshot: true,
-        produceJson: true,
-      },
-    ],
-  ],
+	//
+	// The number of times to retry the entire specfile when it fails as a whole
+	// specFileRetries: 1,
+	//
+	// Delay in seconds between the spec file retry attempts
+	// specFileRetriesDelay: 0,
+	//
+	// Whether or not retried spec files should be retried immediately or deferred to the end of the queue
+	// specFileRetriesDeferred: false,
+	//
+	// Test reporter for stdout.
+	// The only one supported by default is 'dot'
+	// see also: https://webdriver.io/docs/dot-reporter
+	reporters: [
+		[
+			"spec",
+			{
+				addConsoleLogs: true,
+				showPreface: false,
+				// realtimeReporting: true,
+				color: true,
+			},
+		],
+		// [
+		// 	"allure",
+		// 	{
+		// 		outputDir: "allure-results",
+		// 		disableWebdriverStepsReporting: true,
+		// 		disableWebdriverScreenshotsReporting: true,
+		// 		addConsoleLogs: true,
+		// 	},
+		// ],
+		// [
+		// 	"html-nice",
+		// 	{
+		// 		outputDir: "./reports/html-reports/",
+		// 		filename: "nice-report.html",
+		// 		reportTitle: "My Amazing Report",
+		// 		showInBrowser: true,
+		// 		linkScreenshots: true,
+		// 		useOnAfterCommandForScreenshot: true,
+		// 		produceJson: true,
+		// 	},
+		// ],
+	],
 
 	// Options to be passed to Mocha.
 	// See the full list at http://mochajs.org/
-	mochaOpts: {
-		ui: "bdd",
+	// mochaOpts: {
+	// 	ui: "bdd",
+	// 	timeout: 60000,
+	// 	retries: 1,
+	// },
+
+	cucumberOpts: {
+		require: ["./features/step-definitions/**/*.js"],
 		timeout: 60000,
-		retries: 1,
 	},
 
 	//
@@ -310,7 +315,7 @@ export const config = {
 	 */
 	// afterSession: function (config, capabilities, specs) {
 	// },
-	
+
 	/**
 	 * Gets executed when a refresh happens.
 	 * @param {string} oldSessionId session ID of the old session
@@ -330,32 +335,32 @@ export const config = {
 	 */
 	// afterAssertion: function(params) {
 	// }
-  
-  /**
-   * Gets executed once before all workers get launched.
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
-   */
-  onPrepare: async function (config, capabilities) {
-    reportAggregator = new ReportAggregator({
-      outputDir: "./reports/html-reports/",
-      filename: "master-report.html",
-      reportTitle: "Master Report",
-      browserName: capabilities.browserName,
-      collapseTests: true,
-    });
-    await reportAggregator.clean();
-  },
-  
-  /**
-   * Gets executed after all workers got shut down and the process is about to exit. An error
-   * thrown in the onComplete hook will result in the test run failing.
-   * @param {object} exitCode 0 - success, 1 - fail
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {<Object>} results object containing test results
-   */
-  onComplete: async function () {
-    await reportAggregator.createReport();
-  },
+
+	/**
+	 * Gets executed once before all workers get launched.
+	 * @param {object} config wdio configuration object
+	 * @param {Array.<Object>} capabilities list of capabilities details
+	 */
+	// onPrepare: async function (config, capabilities) {
+	// 	reportAggregator = new ReportAggregator({
+	// 		outputDir: "./reports/html-reports/",
+	// 		filename: "master-report.html",
+	// 		reportTitle: "Master Report",
+	// 		browserName: capabilities.browserName,
+	// 		collapseTests: true,
+	// 	});
+	// 	await reportAggregator.clean();
+	// },
+
+	/**
+	 * Gets executed after all workers got shut down and the process is about to exit. An error
+	 * thrown in the onComplete hook will result in the test run failing.
+	 * @param {object} exitCode 0 - success, 1 - fail
+	 * @param {object} config wdio configuration object
+	 * @param {Array.<Object>} capabilities list of capabilities details
+	 * @param {<Object>} results object containing test results
+	 */
+	// onComplete: async function () {
+	// 	await reportAggregator.createReport();
+	// },
 };

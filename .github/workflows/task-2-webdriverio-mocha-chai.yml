@@ -3,11 +3,11 @@ name: CI - Task 2 WebDriverIO
 on:
   push:
     paths:
-      - "task-2-webdriverio-mocha-chai/**"
+      - "task-2-wdio/**"
       - ".github/workflows/task-2-webdriverio-mocha-chai.yml"
   pull_request:
     paths:
-      - "task-2-webdriverio-mocha-chai/**"
+      - "task-2-wdio/**"
       - ".github/workflows/task-2-webdriverio-mocha-chai.yml"
 
 jobs:
@@ -15,20 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./task-2-webdriverio-mocha-chai
+        working-directory: ./task-2-wdio
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          sparse-checkout: task-2-webdriverio-mocha-chai
+          sparse-checkout: task-2-wdio
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: task-2-webdriverio-mocha-chai/package-lock.json
+          cache-dependency-path: task-2-wdio/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -44,31 +44,34 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./task-2-webdriverio-mocha-chai
+        working-directory: ./task-2-wdio
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          sparse-checkout: task-2-webdriverio-mocha-chai
+          sparse-checkout: task-2-wdio
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: task-2-webdriverio-mocha-chai/package-lock.json
+          cache-dependency-path: task-2-wdio/package-lock.json
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm run test
+      - name: Run sign-in tests
+        run: npm run test:sign-in
+
+      - name: Run product overview tests
+        run: npm run test:product-overview
 
       - name: Upload screenshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: webdriverio-screenshots
-          path: task-2-webdriverio-mocha-chai/screenshots/
+          path: task-2-wwdio/screenshots/
           if-no-files-found: ignore

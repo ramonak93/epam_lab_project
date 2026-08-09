@@ -21,8 +21,10 @@
 	},
 	"scripts": {
 		"test": "wdio run ./config/wdio.conf.js",
-		"test:sign-in": "wdio run ./config/wdio.conf.js --spec ./test/specs/sign_in.spec.js",
-		"test:product-overview": "wdio run ./config/wdio.conf.js --spec ./test/specs/product_overview.spec.js",
+		"test:sign-in": "wdio run ./config/wdio.conf.js --cucumberOpts.tagExpression \"@sign_in\"",
+		"test:sign-in:positive": "wdio run ./config/wdio.conf.js --cucumberOpts.tagExpression \"@sign_in and @positive\"",
+		"test:sign-in:negative": "wdio run ./config/wdio.conf.js --cucumberOpts.tagExpression \"@sign_in and @negative\"",
+		"test:product-overview": "wdio run ./config/wdio.conf.js --cucumberOpts.tagExpression \"@product_overview\"",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"lint:prettier": "prettier . --check",

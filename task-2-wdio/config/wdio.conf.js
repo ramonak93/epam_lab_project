@@ -3,8 +3,8 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const screenshotsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "screenshots");
-import { ReportAggregator } from "wdio-html-nice-reporter";
-let reportAggregator;
+// import { ReportAggregator } from "wdio-html-nice-reporter";
+// let reportAggregator;
 
 export const config = {
 	//
@@ -341,16 +341,16 @@ export const config = {
 	 * @param {object} config wdio configuration object
 	 * @param {Array.<Object>} capabilities list of capabilities details
 	 */
-	onPrepare: async function (config, capabilities) {
-		reportAggregator = new ReportAggregator({
-			outputDir: "./reports/html-reports/",
-			filename: "master-report.html",
-			reportTitle: "Master Report",
-			browserName: capabilities.browserName,
-			collapseTests: true,
-		});
-		await reportAggregator.clean();
-	},
+	// onPrepare: async function (config, capabilities) {
+	// 	reportAggregator = new ReportAggregator({
+	// 		outputDir: "./reports/html-reports/",
+	// 		filename: "master-report.html",
+	// 		reportTitle: "Master Report",
+	// 		browserName: capabilities.browserName,
+	// 		collapseTests: true,
+	// 	});
+	// 	await reportAggregator.clean();
+	// },
 
 	/**
 	 * Gets executed after all workers got shut down and the process is about to exit. An error
@@ -360,7 +360,7 @@ export const config = {
 	 * @param {Array.<Object>} capabilities list of capabilities details
 	 * @param {<Object>} results object containing test results
 	 */
-	onComplete: async function () {
-		await reportAggregator.createReport();
-	},
+	// onComplete: async function () {
+	// 	await reportAggregator.createReport();
+	// },
 };
